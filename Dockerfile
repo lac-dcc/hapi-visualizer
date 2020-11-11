@@ -1,0 +1,61 @@
+FROM openjdk:8-jdk-alpine
+RUN apk add --no-cache curl tar bash procps git npm
+
+# Downloading and installing Gradle
+# 1- Define a constant with the version of gradle you want to install
+ARG GRADLE_VERSION=5.6.2
+
+# 2- Define the URL where gradle can be downloaded from
+ARG GRADLE_BASE_URL=https://services.gradle.org/distributions
+
+# 3- Define the SHA key to validate the gradle download
+#    obtained from here https://gradle.org/release-checksums/
+ARG GRADLE_SHA=32fce6628848f799b0ad3205ae8db67d0d828c10ffe62b748a7c0d9f4a5d9ee0
+
+
+# 4- Create the directories, download gradle, validate the download, install it, remove downloaded file and set links
+RUN mkdir -p /usr/share/gradle /usr/share/gradle/ref \
+  && echo "Downlaoding gradle hash" \
+  && curl -fsSL -o /tmp/gradle.zip ${GRADLE_BASE_URL}/gradle-${GRADLE_VERSION}-bin.zip \
+  \
+  && echo "Checking download hash" \
+  && echo "${GRADLE_SHA}  /tmp/gradle.zip" | sha256sum -c - \
+  \
+  && echo "Unziping gradle" \
+  && unzip -d /usr/share/gradle /tmp/gradle.zip \
+   \
+  && echo "Cleaning and setting links" \
+  && rm -f /tmp/gradle.zip \
+  && ln -s /usr/share/gradle/gradle-${GRADLE_VERSION} /usr/bin/gradle
+
+# 5- Define environmental variables required by gradle
+ENV GRADLE_VERSION 4.0.1
+ENV GRADLE_HOME /usr/bin/gradle
+ENV GRADLE_USER_HOME /cache
+
+ENV PATH $PATH:$GRADLE_HOME/bin
+
+# VOLUME $GRADLE_USER_HOME
+
+RUN git clone https://github.com/lac-dcc/hapi.git /hapi
+RUN cd /hapi && git checkout -b visualizer origin/visualizer
+
+# FROM gradle:5.6.2-jdk8 AS build
+# COPY --from=dnld /hapi /home/gradle/src
+# COPY --chown=gradle:gradle . /home/gradle/src
+# WORKDIR /home/gradle/src
+RUN cd /hapi && gradle build-all-tools --no-daemon
+
+# FROM openjdk:8-jre-slim
+# WORKDIR /usr/src/app
+
+# FROM node:12 as runner
+# WORKDIR /usr/src/app
+RUN mkdir /server
+COPY package*.json ./server/
+RUN cd /server && npm install
+COPY . ./server/
+# COPY /hapi/build/libs/ ./bin
+RUN mv /hapi/build/libs/* ./server/bin/
+EXPOSE 8080
+CMD [ "npm", "start", "--prefix", "/server" ]
