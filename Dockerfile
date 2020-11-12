@@ -37,25 +37,22 @@ ENV PATH $PATH:$GRADLE_HOME/bin
 
 # VOLUME $GRADLE_USER_HOME
 
-RUN git clone https://github.com/lac-dcc/hapi.git /hapi
-RUN cd /hapi && git checkout -b visualizer origin/visualizer
+# RUN mkdir /hapi-visualizer
+WORKDIR /hapi-visualizer/
+# RUN git clone https://github.com/lac-dcc/hapi.git
+# RUN cd hapi && git checkout -b visualizer origin/visualizer
 
 # FROM gradle:5.6.2-jdk8 AS build
 # COPY --from=dnld /hapi /home/gradle/src
 # COPY --chown=gradle:gradle . /home/gradle/src
 # WORKDIR /home/gradle/src
-RUN cd /hapi && gradle build-all-tools --no-daemon
+# RUN cd /hapi && gradle build-all-tools --no-daemon
 
-# FROM openjdk:8-jre-slim
-# WORKDIR /usr/src/app
-
-# FROM node:12 as runner
-# WORKDIR /usr/src/app
-RUN mkdir /server
-COPY package*.json ./server/
-RUN cd /server && npm install
-COPY . ./server/
+# COPY package*.json ./server/
+# RUN cd /server && npm install
+COPY . /hapi-visualizer/
 # COPY /hapi/build/libs/ ./bin
-RUN mv /hapi/build/libs/* ./server/bin/
+RUN bash build.sh --from-scratch
 EXPOSE 8080
-CMD [ "npm", "start", "--prefix", "/server" ]
+ENTRYPOINT [ "bash", "build.sh"]
+CMD ["run"]
