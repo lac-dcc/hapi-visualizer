@@ -35,23 +35,9 @@ ENV GRADLE_USER_HOME /cache
 
 ENV PATH $PATH:$GRADLE_HOME/bin
 
-# VOLUME $GRADLE_USER_HOME
-
-# RUN mkdir /hapi-visualizer
 WORKDIR /hapi-visualizer/
-# RUN git clone https://github.com/lac-dcc/hapi.git
-# RUN cd hapi && git checkout -b visualizer origin/visualizer
 
-# FROM gradle:5.6.2-jdk8 AS build
-# COPY --from=dnld /hapi /home/gradle/src
-# COPY --chown=gradle:gradle . /home/gradle/src
-# WORKDIR /home/gradle/src
-# RUN cd /hapi && gradle build-all-tools --no-daemon
-
-# COPY package*.json ./server/
-# RUN cd /server && npm install
 COPY . /hapi-visualizer/
-# COPY /hapi/build/libs/ ./bin
 RUN bash build.sh --from-scratch
 EXPOSE 8080
 ENTRYPOINT [ "bash", "build.sh"]
