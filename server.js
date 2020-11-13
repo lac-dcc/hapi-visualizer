@@ -21,9 +21,9 @@ const jsonParser = bodyParser.json()
 
 app.use(express.static('static'));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/static/index.html'));
-});
+// app.get('/', function (req, res) {
+//   res.sendFile(path.join(__dirname + '/static/index.html'));
+// });
 
 app.post('/generate', jsonParser, function (req, res) {
 
