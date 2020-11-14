@@ -1,0 +1,99 @@
+.logo-header {
+  height:3rem;
+  margin: 10px;
+}
+
+.rounded {
+  border: 1px solid black;
+  border-radius: 50% !important;
+  behavior: url(PIE.htc);
+}
+
+.header {
+  margin-top: 32px;
+}
+
+/* .container-row {
+  background-color: white;
+  border-radius: 10px;
+  padding: 0;
+} */
+
+.container {
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 10px;
+	-o-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	-o-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	-ms-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.container h2 {
+	font-weight: 700;
+	font-size: 30px;
+	padding: 6px 0 0;
+	margin-bottom: 34px;
+}
+
+.container .write-code button {
+	background: #fff;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	width: 180px;
+	border: none;
+	margin: 15px 0 50px 0px;
+	cursor: pointer;
+	color: #333;
+	font-weight: 700;
+	font-size: 15px;
+	font-family: 'Open Sans', sans-serif;
+	appearance: unset;
+    -moz-appearance: unset;
+    -webkit-appearance: unset;
+    -o-appearance: unset;
+    -ms-appearance: unset;
+    outline: none;
+    -moz-outline: none;
+    -webkit-outline: none;
+    -o-outline: none;
+    -ms-outline: none;
+}
+.container .write-code button:hover {
+	background: #e5e5e5;
+}
+.container .write-code button:focus {
+  border-color: #3786bd;
+  box-shadow: inset 0 1px 1px rgba(252, 252, 252, 0.075), 0 0 8px rgba(255, 255, 255, 0.6);
+}
+.container .write-code button:active {
+  border-color: #3786bd;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.075), 0 0 8px rgba(255, 255, 255, 0.6);
+}
+.container .write-code #code {
+	resize: none;
+}
+
+.container .write-code .form-control:focus {
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.075), 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+
+.write-code {
+  background: #3786bd;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding: 20px 40px;
+	position: relative;
+	width: 100%;
+	color: #fff;
+}
+
+.submit-code {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
