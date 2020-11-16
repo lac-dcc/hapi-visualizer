@@ -36,7 +36,7 @@
               <div class="form-group">
                 <!-- <label for="code">Code</label> -->
                 <textarea id="code" class="form-control" rows="12"
-                 placeholder="Type your Hapi code..." required> </textarea>
+                 placeholder="Type your Hapi code..."> </textarea>
               </div>
                 <button type="button" class="btn btn-secondary register">Generate</button>
                 <button type="button" class="btn btn-secondary preview">Preview</button>
@@ -44,7 +44,32 @@
 
           </div> 
           <div class="col-4 submit-code" style="background-color: white;">
-            a
+            <div class="row justify-content-center no-gutters" style="margin-top: 100px;">
+              <div class="col-11 upload-drop-zone" id="drop-zone">
+                <ul class="list-group list-group-flush" id="upload-list">
+                  
+                </ul>
+                <form>
+                  <div class="form-row justify-content-end">
+                    <div class="col-auto" id="label-drop">
+                        Drop
+                    </div>
+                    <div class="col-auto" id="label-or">
+                        or
+                    </div>
+                    <div class="col-auto" id="browse">
+                      <button type="button" class="btn btn-primary mb-2">Browse</button>
+                    </div>
+                  </div>
+                </form>
+
+                <!-- <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="my-customFile" id="customFile" multiple>
+                   <label class="custom-file-label" for="customFile">Choose or Drag files</label> 
+                </div> -->
+              </div>
+        
+            </div>
           </div>
         </div>
       </div>

@@ -9,27 +9,28 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+  
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <title>Hapi Demo!</title>
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="container">
 
-    <div class="row">
-        <div class="col-lg-8" style="background-color:rgb(45, 212, 235);">
-            <span> a</span>
+    <div class="row justify-content-center no-gutters" style="margin-top: 100px;">
+      <div class="col-lg-3 upload-drop-zone" id="drop-zone" style="background-color:rgb(45, 212, 235); max-height: 100x">  
+        <!-- <input type="file" id="selectfile" multiple>   -->
+        <ul class="list-group list-group-flush" id="upload-list">
+          
+        </ul>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" name="my-customFile" id="customFile" multiple>
+          <label class="custom-file-label" for="customFile">Choose or Drag files</label>
         </div>
-        <div class="col-lg-4" style="background-color:rgb(51, 235, 45);">
-            <span> a</span>
-        </div>
-        <!-- <div class="col-sm-3" style="background-color:rgb(235, 67, 45);">
-            <span> a</span>
-        </div>
-        <div class="col-sm-5" style="background-color:rgb(222, 235, 45);">
-            <span> a</span>
-        </div> -->
+      </div>
+
     </div>
+  </div>
 
   <!-- Jquery JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
