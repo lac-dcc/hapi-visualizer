@@ -57,9 +57,16 @@ $(document).ready(function () {
     e.preventDefault();
   });
 
-  $("#customFile").on('change', function() {
+  $(document).on('change', ':file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+  });
+
+  $("#customFile").on('fileselect', function() {
     var inputedFiles = document.getElementById('customFile').files;
-    addFiles(inputedFiles.files);
+    addFiles(inputedFiles);
   });
 });
 
@@ -76,9 +83,9 @@ function removeFile(removedLi){
   filesForUp.splice(index, 1);
 
   //reset the attr (index, id) for each <li>
-  var childrens = ul.children;
-  for(i=0; i< childrens.length; i++){
-    childrens[i].setAttribute('index', i)
+  var children = ul.children;
+  for(i=0; i< children.length; i++){
+    children[i].setAttribute('index', i)
   }
 
 }
@@ -87,7 +94,7 @@ var filesForUp = [];
 var maxFiles = 5;
 function addFiles(files){
   var size = files.length;
-  if(size + filesForUp > maxFiles){
+  if(size + filesForUp.length > maxFiles){
     // put a message to show maxFiles overflow
     return false;
   }

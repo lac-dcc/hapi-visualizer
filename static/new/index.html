@@ -31,20 +31,29 @@
       <div class="container col-11">
         <div class="row">
           <div class="col-8 write-code">
-            <h2>CODE</h2>
+            <h2>MAIN</h2>
             <form>
               <div class="form-group">
                 <!-- <label for="code">Code</label> -->
                 <textarea id="code" class="form-control" rows="12"
-                 placeholder="Type your Hapi code..."> </textarea>
+                 placeholder="or Type your Hapi code..."> </textarea>
               </div>
-                <button type="button" class="btn btn-secondary register">Generate</button>
-                <button type="button" class="btn btn-secondary preview">Preview</button>
+                <!-- <button type="button" class="btn btn-secondary register">Generate</button>
+                <button type="button" class="btn btn-secondary preview">Preview</button> -->
             </form>
 
           </div> 
-          <div class="col-4 submit-code" style="background-color: white;">
-            <div class="row justify-content-center no-gutters" style="margin-top: 100px;">
+          <div class="col-4 submit-code">
+            <h2>IMPORT FILES</h2>
+            <div class="row">
+              <div class="col-10">
+                <span></span>
+              </div>
+              <div class="col-2">
+                <span class="counter">0/5</span>
+              </div>
+            </div>
+            <div class="row justify-content-center">
               <div class="col-11 upload-drop-zone" id="drop-zone">
                 <ul class="list-group list-group-flush" id="upload-list">
                   
@@ -58,16 +67,18 @@
                         or
                     </div>
                     <div class="col-auto" id="browse">
-                      <button type="button" class="btn btn-primary mb-2">Browse</button>
+                      <label class="btn btn-primary mb-2" id="browse-button">
+                        Browse&hellip; <input type="file" id="customFile" style="display: none;" multiple>
+                      </label>
                     </div>
                   </div>
                 </form>
-
-                <!-- <div class="custom-file">
-                  <input type="file" class="custom-file-input" name="my-customFile" id="customFile" multiple>
-                   <label class="custom-file-label" for="customFile">Choose or Drag files</label> 
-                </div> -->
               </div>
+              
+              <form>
+                <button type="button" class="btn btn-secondary register">Generate</button>
+                <button type="button" class="btn btn-secondary preview">Preview</button>
+              </form>
         
             </div>
           </div>
@@ -82,8 +93,8 @@
 
   <!-- Jquery JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="viz.js"></script>
-  <script src="full-render.js"></script>
+  <script src="/viz.js"></script>
+  <script src="/full-render.js"></script>
   <script src="index.js"></script>
 </body>
 
