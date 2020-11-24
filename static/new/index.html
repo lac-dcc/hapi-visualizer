@@ -34,7 +34,18 @@
             <h2>MAIN</h2>
             <form>
               <div class="form-group">
-                <!-- <label for="code">Code</label> -->
+                <div class="col-12 upload-main">
+                  <div class="row">
+                    <div class="col-9" id="drop-main">
+
+                    </div>
+                    <div class="col-3">
+                      <label class="btn btn-primary btn-block" id="browse-main">
+                        Browse&hellip; <input type="file" id="customFile2" style="display: none;">
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 <textarea id="code" class="form-control" rows="12"
                  placeholder="or Type your Hapi code..."> </textarea>
               </div>
@@ -74,13 +85,12 @@
                   </div>
                 </form>
               </div>
-              
-              <form>
-                <button type="button" class="btn btn-secondary register">Generate</button>
-                <button type="button" class="btn btn-secondary preview">Preview</button>
-              </form>
-        
             </div>
+            <div class="row form-row-last justify-content-end submit-buttons">
+              <input type="button" name="register" id="preview" value="Preview">
+              <input type="button" name="register" id="generate" value="Generate">
+            </div>
+        
           </div>
         </div>
       </div>

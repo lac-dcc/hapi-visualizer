@@ -68,7 +68,34 @@ $(document).ready(function () {
     var inputedFiles = document.getElementById('customFile').files;
     addFiles(inputedFiles);
   });
+
+  $("#customFile2").on('fileselect', function() {
+    var mainFile = document.getElementById('customFile').files;
+    addMain(mainFile[0]);
+    console.log(mainFile[0]);
+  });
 });
+
+function addMain(mainFile){
+  dropMainArea = document.getElementById('drop-main');
+
+  var span = document.createElement('span');
+  span.appendChild(document.createTextNode(mainFile.name));
+  dropMainArea.appendChild(span);
+  
+  var button = document.createElement('button');
+  button.addEventListener('click', function(ev){
+    removeMain(ev.target.parentElement);
+  });
+  button.className = 'btn btn-danger btn-sm'
+  button.appendChild(document.createTextNode('X'));
+  button.setAttribute('type', 'button'); // added line
+  dropMainArea.appendChild(button);
+}
+
+function removeMain(){
+
+}
 
 function removeFile(removedLi){
   console.log(removedLi)
@@ -130,13 +157,9 @@ function addFiles(files){
 + function($) {
   'use strict';
 
-  // UPLOAD CLASS DEFINITION
-  // ======================
-
   var dropZone = document.getElementById('drop-zone');
 
   dropZone.ondrop = function(e) {
-    // e.preventDefault();
     e.stopPropagation();
     e.preventDefault();
     this.className = 'col-11  upload-drop-zone';
@@ -166,5 +189,39 @@ function preventDrag(e){
   this.className = 'col-11 upload-drop-zone drop';
 
   $('#label-drop')[0].className = 'col-auto label-blue';
+  return false;
+}
+
++ function($) {
+  'use strict';
+
+  var dropMain = document.getElementById('drop-main');
+
+  dropMain.ondrop = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.className = 'col-9';
+    addMain(e.dataTransfer.files[0])
+  }
+
+  dropMain.ondragover = preventDragMain;
+
+  dropMain.ondragleave = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.className = 'col-9';
+    return false;
+  }
+    
+  dropMain.ondragenter = preventDragMain;
+
+  dropMain.ondragstart = preventDragMain;
+}(jQuery);
+
+function preventDragMain(e){
+  e.stopPropagation();
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  this.className = 'col-9 drop';
   return false;
 }
