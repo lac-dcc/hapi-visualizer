@@ -70,31 +70,41 @@ $(document).ready(function () {
   });
 
   $("#customFile2").on('fileselect', function() {
-    var mainFile = document.getElementById('customFile').files;
-    addMain(mainFile[0]);
-    console.log(mainFile[0]);
+    var mainFile = document.getElementById('customFile2').files[0];
+    addMain(mainFile);
   });
 });
 
-function addMain(mainFile){
-  dropMainArea = document.getElementById('drop-main');
+var mainFile = undefined;
+function addMain(_mainFile){
+  filenameArea = document.getElementById('filename-row');
+  if (mainFile != undefined){
+    mainFile = _mainFile;
+    var span = filenameArea.children[0];
+    span.textContent = _mainFile.name;
+    return;
+  }
+
+  mainFile = _mainFile;
 
   var span = document.createElement('span');
-  span.appendChild(document.createTextNode(mainFile.name));
-  dropMainArea.appendChild(span);
-  
+  span.appendChild(document.createTextNode(_mainFile.name));
+  span.className = 'col-10 file-name';
+  filenameArea.appendChild(span);
+
   var button = document.createElement('button');
   button.addEventListener('click', function(ev){
     removeMain(ev.target.parentElement);
   });
-  button.className = 'btn btn-danger btn-sm'
+  button.className = 'btn btn-danger remove-button'
   button.appendChild(document.createTextNode('X'));
-  button.setAttribute('type', 'button'); // added line
-  dropMainArea.appendChild(button);
+  button.setAttribute('type', 'button');
+  filenameArea.appendChild(button);
 }
 
-function removeMain(){
-
+function removeMain(filenameArea){
+  mainFile = undefined
+  filenameArea.innerHTML = '';
 }
 
 function removeFile(removedLi){
@@ -142,13 +152,12 @@ function addFiles(files){
     });
     button.className = 'btn btn-danger btn-sm'
     button.appendChild(document.createTextNode('X'));
-    button.setAttribute('type', 'button'); // added line
+    button.setAttribute('type', 'button');
     li.appendChild(button);
     
     
     var elemNumber = filesForUp.length+i;
-    // li.setAttribute('id', 'file'+elemNumber); // added line
-    li.setAttribute('index', elemNumber); // added line
+    li.setAttribute('index', elemNumber);
     ul.appendChild(li);
     filesForUp.push(files[i])
   }

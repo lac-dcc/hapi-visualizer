@@ -53,12 +53,13 @@
 }
 
 .container .write-code #drop-main {
-  border: 3px dashed #222;
+  border: 3px dashed rgb(14, 51, 153);
   padding-right: -12.5px;
   border-top-left-radius: 5px;
   padding-right: 0;
   background: rgba(255, 255, 255, 0.2);
   border-top-left-radius: 5px;
+  padding-top: 2px;
 }
 
 .container .write-code .upload-main {
@@ -70,8 +71,27 @@
   padding-right: 0px;
 }
 
+.container .write-code #drop-main .file-name {
+  font-weight: 700;
+  font-size: 18px;
+  margin-right: 0px;
+  margin-left: 8px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 0;
+}
+.container .write-code #drop-main #filename-row {
+  margin-right: 0;
+}
+
+.container .write-code #drop-main .remove-button {
+  margin-right: 4px;
+}
+
+
 .container .write-code .drop {
-  border-color: white !important;
+  background-color: #d0d0ff !important;
 }
 
 .container .write-code .upload-main #browse-main {
@@ -134,6 +154,7 @@
 
 .container .submit-code .drop {
   border-color:#53c83c;
+  background-color: rgba(55, 134, 189, 0.1);
 }
 
 .container .submit-code span {
