@@ -31,6 +31,7 @@ function genDot(svgId, dot) {
 }
 
 $(document).ready(function () {
+  $('#toggle-main-code')[0].checked = true;
 
   $("#generate").click(function (e) {
 
@@ -73,7 +74,38 @@ $(document).ready(function () {
     var mainFile = document.getElementById('customFile2').files[0];
     addMain(mainFile);
   });
+
+  $('#toggle-main-code').on('change', function(ev) {
+    var textArea = document.getElementById('code');
+    var dropArea = document.getElementById('file-main');
+    var fileInputToggleLabel = document.getElementById('fileInput');
+    var typeCodeToggleLabel = document.getElementById('typeCode');
+    
+    if(ev.target.checked){
+      dropArea.setAttribute('disabled', '');
+      textArea.removeAttribute('disabled');
+      toggleMain(textArea, dropArea, typeCodeToggleLabel, fileInputToggleLabel);
+      
+    } else {
+      dropArea.removeAttribute('disabled');
+      textArea.setAttribute('disabled', '');
+      toggleMain(dropArea, textArea, fileInputToggleLabel, typeCodeToggleLabel);
+    }
+  });
+
+  $('.toggle-text').on('click', function(ev){
+    var toggleLabel = ev.target;
+    if(!toggleLabel.classList.contains('selected'))
+      document.getElementById('toggle-main-code').click();
+  });
 });
+
+function toggleMain(toAble, toDisable, toggleTrue, toggleFalse){
+  toggleTrue.classList.add('selected');
+  toggleFalse.classList.remove('selected');
+  toAble.classList.remove('disabled');
+  toDisable.classList.add('disabled');
+}
 
 var mainFile = undefined;
 function addMain(_mainFile){
@@ -124,7 +156,7 @@ function removeFile(removedLi){
   for(i=0; i< children.length; i++){
     children[i].setAttribute('index', i)
   }
-
+  updateCounter();
 }
 
 var filesForUp = [];
@@ -161,6 +193,12 @@ function addFiles(files){
     ul.appendChild(li);
     filesForUp.push(files[i])
   }
+  updateCounter();
+}
+
+function updateCounter(){
+  var counter = document.getElementById('counter');
+  counter.innerText = ''+filesForUp.length+'/'+maxFiles;
 }
 
 + function($) {
@@ -209,6 +247,8 @@ function preventDrag(e){
   dropMain.ondrop = function(e) {
     e.stopPropagation();
     e.preventDefault();
+    if(document.getElementById('toggle-main-code').checked)
+      return;
     this.className = 'col-9';
     addMain(e.dataTransfer.files[0])
   }
@@ -218,6 +258,8 @@ function preventDrag(e){
   dropMain.ondragleave = function(e) {
     e.stopPropagation();
     e.preventDefault();
+    if(document.getElementById('toggle-main-code').checked)
+      return;
     this.className = 'col-9';
     return false;
   }
@@ -230,6 +272,8 @@ function preventDrag(e){
 function preventDragMain(e){
   e.stopPropagation();
   e.preventDefault();
+  if(document.getElementById('toggle-main-code').checked)
+    return;
   e.dataTransfer.dropEffect = 'move';
   this.className = 'col-9 drop';
   return false;

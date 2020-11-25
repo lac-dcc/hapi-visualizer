@@ -34,25 +34,40 @@
             <h2>MAIN</h2>
             <form>
               <div class="form-group">
-                <div class="col-12 upload-main">
-                  <div class="row">
-                    <div class="col-9" id="drop-main">
-                      <div class="row d-flex justify-content-between align-items-center" id="filename-row">
-
+                <fieldset id="file-main" class="disabled" disabled>
+                  <div class="col-12 upload-main">
+                    <div class="row">
+                      <div class="col-9" id="drop-main">
+                        <div class="row d-flex justify-content-between align-items-center" id="filename-row">
+                          
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <label class="btn btn-primary btn-block" id="browse-main">
+                          Browse&hellip; <input type="file" id="customFile2" style="display: none;">
+                        </label>
                       </div>
                     </div>
-                    <div class="col-3">
-                      <label class="btn btn-primary btn-block" id="browse-main">
-                        Browse&hellip; <input type="file" id="customFile2" style="display: none;">
-                      </label>
-                    </div>
                   </div>
-                </div>
+                </fieldset>
                 <textarea id="code" class="form-control" rows="12"
                  placeholder="or Type your Hapi code..."> </textarea>
+                 <div class="row mt-2 justify-content-end">
+                   <div class= "col-auto toggle-text" id="fileInput">
+                      Use file input
+                   </div>
+                   <div class= "col-auto toggle">
+                    <label class="switch">
+                      <input type="checkbox" id="toggle-main-code" checked>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class= "col-auto toggle-text selected" id="typeCode">
+                    Typing code
+                  </div>
+                </div>
               </div>
             </form>
-
           </div> 
           <div class="col-4 submit-code">
             <h2>IMPORT FILES</h2>
@@ -61,13 +76,13 @@
                 <span></span>
               </div>
               <div class="col-2">
-                <span class="counter">0/5</span>
+                <span id="counter">0/5</span>
               </div>
             </div>
             <div class="row justify-content-center">
               <div class="col-11 upload-drop-zone" id="drop-zone">
                 <ul class="list-group list-group-flush" id="upload-list">
-                  
+
                 </ul>
                 <form>
                   <div class="form-row justify-content-end">
@@ -90,15 +105,10 @@
               <input type="button" name="register" id="preview" value="Preview">
               <input type="button" name="register" id="generate" value="Generate">
             </div>
-        
           </div>
         </div>
       </div>
-
     </div>
-    
-
-    
   </div>
 
   <!-- Jquery JS -->
