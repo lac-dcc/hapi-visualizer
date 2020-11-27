@@ -21,19 +21,19 @@
 
 <body>
   
-  <div class="container-fluid">
+  <div class="container-fluid h-98">
     <div class="row justify-content-center header">
       <div class="rounded"> 
         <img src="new-logo.svg" class="logo-header" alt="My image"/>
       </div>
     </div>
-    <div class="row">
-      <div class="container col-11">
-        <div class="row">
-          <div class="col-8 write-code">
+    <div class="row h-90">
+      <div class="container col-11 h-100">
+        <div class="row h-100">
+          <div class="col-8 write-code mh-100">
             <h2>MAIN</h2>
-            <form>
-              <div class="form-group">
+            <form class="h-75">
+              <div class="form-group h-100">
                 <fieldset id="file-main" class="disabled" disabled>
                   <div class="col-12 upload-main">
                     <div class="row">
@@ -102,9 +102,38 @@
               </div>
             </div>
             <div class="row form-row-last justify-content-end submit-buttons">
-              <input type="button" name="register" id="preview" value="Preview">
+              <input type="button" name="register" id="preview" value="Preview" data-toggle="modal" data-target="#exampleModalLong">
               <input type="button" name="register" id="generate" value="Generate">
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">YAML</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Matrix</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Lattices</a>
+            </li>
+          </ul>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">YAML</div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Matrix</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Lattices</div>
           </div>
         </div>
       </div>
@@ -116,6 +145,7 @@
   <script src="/viz.js"></script>
   <script src="/full-render.js"></script>
   <script src="index.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>

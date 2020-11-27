@@ -1,10 +1,30 @@
+html {
+  height: 98% !important;
+}
+
+body {
+  height: 100% !important;
+  min-height: 640px !important;
+}
+
+.h-98 {
+  height: 98% !important;
+}
+
+.h-90 {
+  height: 90% !important;
+}
+
 .logo-header {
   height: 5rem;
   margin: 15px;
 }
 
+.h-100pct {
+  height: 100% !important;
+}
+
 .rounded {
-  /* border: 1px solid black; */
   border-radius: 50% !important;
   behavior: url(PIE.htc);
   border-top: 8px solid #3786bd;
@@ -141,6 +161,8 @@
 
 .container .write-code #code {
   resize: none;
+  height: 88%;
+  margin-bottom: 12px;
 }
 
 .container .write-code .form-control:focus {
@@ -214,15 +236,6 @@
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-
-/* Rounded sliders */
-/* .slider.round {
-  border-radius: 34px;
-} */
-
-/* .slider.round:before {
-  border-radius: 50%;
-} */
 
 .container .submit-code {
   padding: 20px 40px;
@@ -328,4 +341,8 @@
 }
 .container .submit-code #generate {
   margin-left: 16px;
+}
+
+.modal .modal-header {
+  border: none;
 }
