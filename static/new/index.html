@@ -116,13 +116,13 @@
         <div class="modal-header">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">YAML</a>
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#yaml" role="tab" aria-controls="home" aria-selected="true">YAML</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Matrix</a>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#matrix" role="tab" aria-controls="profile" aria-selected="false">Matrix</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Lattices</a>
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#lattices" role="tab" aria-controls="contact" aria-selected="false">Lattices</a>
             </li>
           </ul>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -131,9 +131,26 @@
         </div>
         <div class="modal-body">
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">YAML</div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Matrix</div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Lattices</div>
+            <div class="tab-pane fade show active" id="yaml" role="tabpanel" aria-labelledby="home-tab">
+              <textarea id="yaml-code" class="form-control" rows="12" disabled> </textarea>
+            </div>
+            <div class="tab-pane fade" id="matrix" role="tabpanel" aria-labelledby="profile-tab">Matrix</div>
+            <div class="tab-pane fade" id="lattices" role="tabpanel" aria-labelledby="contact-tab">
+              <div class="row justify-content-center">
+                <div class="">
+                  <label for="actors">Actors</label>
+                  <div id="actorsGraph"></div>
+                </div>
+                <div class="">
+                  <label for="resources">Resources</label>
+                  <div id="resourcesGraph"></div>
+                </div>
+                <div class="">
+                  <label for="actions">Actions</label>
+                  <div id="actionsGraph"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

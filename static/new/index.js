@@ -30,32 +30,75 @@ function genDot(svgId, dot) {
     });
 }
 
+function generate(){
+  const request = new XMLHttpRequest();
+  const formData = new FormData();
+  var mainCode = undefined;
+
+  if (document.getElementById('toggle-main-code').checked ) {
+    const typedCode = $('textarea#code').val();
+    mainCode = new File(typedCode.split('\n'), "main.hp", {
+      type: "text/plain",
+    });
+  } else {
+    mainCode = mainFile;
+    //ToDo: throws an error if mainFile is undefined
+  }
+
+  // append main file at formData
+  formData.append('action', 'hapicode');
+  formData.append('main', mainCode);
+  // append importFiles at formData
+  for(i=0; i< filesForUp.length; i++){
+    formData.append('import'+(i+1), filesForUp[i]);
+  }
+  request.onreadystatechange = receivingData;
+  request.open("POST", '/new/generate', true);
+  request.send(formData);
+}
+
+function receivingData() {
+  if (this.readyState == 4 && this.status == 200) {
+      var response = JSON.parse(this.responseText);
+      success(response);
+  }
+};
+
+function success(res){
+  $('textarea#yaml-code').text(res.yaml);
+  $('#matrix').html(res.matrix);
+  genDot('actorsGraph', res.actors);
+  genDot('resourcesGraph', res.resources);
+  genDot('actionsGraph', res.actions);
+}
+
 $(document).ready(function () {
   $('#toggle-main-code')[0].checked = true;
 
   $("#generate").click(function (e) {
 
-    const hapi = $('textarea#hapi').val();
+    generate();
+    // const hapi = $('textarea#hapi').val();
 
-    const data = {
-      hapi
-    };
+    // const data = {
+    //   hapi
+    // };
 
-    post('generate', data).then(({ error, ...res }) => {
-      if (error) {
-        return alert(error);
-      }
+    // post('generate', data).then(({ error, ...res }) => {
+    //   if (error) {
+    //     return alert(error);
+    //   }
 
-      $("textarea#yaml").val(res.yaml);
-      genDot("actorsGraph", res.actors);
-      genDot("resourcesGraph", res.resources);
-      genDot("actionsGraph", res.actions);
+    //   $("textarea#yaml").val(res.yaml);
+    //   genDot("actorsGraph", res.actors);
+    //   genDot("resourcesGraph", res.resources);
+    //   genDot("actionsGraph", res.actions);
 
-      $("#matrix").load("output/main.html");
+      // $("#matrix").load("output/main.html");
 
-    });
+    // });
 
-    e.preventDefault();
+    // e.preventDefault();
   });
 
   $(document).on('change', ':file', function() {

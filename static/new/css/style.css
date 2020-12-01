@@ -31,7 +31,7 @@ body {
   border-bottom: 8px solid #fc0;
   border-right: 2px solid #82f087;
   border-left: 2px solid #82f087;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   background: white;
 }
