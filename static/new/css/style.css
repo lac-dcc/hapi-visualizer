@@ -173,7 +173,12 @@ body {
   padding: 4px 8px;
   font-weight: 500;
   cursor: pointer;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 115px;
 }
+
 .container .write-code .selected {
   font-weight: 800;
 }
@@ -297,7 +302,7 @@ body {
 }
 
 .upload-drop-zone #browse {
-  margin-right: 16px;
+  /* margin-right: 16px; */
 }
 
 .container .submit-code #browse-button:hover,
@@ -322,7 +327,8 @@ body {
   background: #3786bd;
   border-top-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  width: 130px;
+  /* width: 130px; */
+  width: auto;
   border: none;
   margin: 6px 0 24px 0;
   cursor: pointer;
@@ -332,7 +338,7 @@ body {
 }
 
 .container .submit-code input {
-  padding: 12.5px;
+  padding: 12.5px 16px;
 }
 
 .container .submit-code .submit-buttons {
@@ -345,4 +351,21 @@ body {
 
 .modal .modal-header {
   border: none;
+}
+
+.modal.fade.show {
+  display: flex !important;
+  display: -ms-flexbox !important;
+}
+
+.tab-pane.active {
+  display: flex !important;
+  display: -ms-flexbox !important;
+  height: 100% !important;
+}
+
+.tab-pane.active textarea#yaml-code {
+  min-height: 450px;
+  resize: none;
+  height: auto;
 }

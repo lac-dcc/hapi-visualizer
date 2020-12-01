@@ -78,27 +78,8 @@ $(document).ready(function () {
   $("#generate").click(function (e) {
 
     generate();
-    // const hapi = $('textarea#hapi').val();
 
-    // const data = {
-    //   hapi
-    // };
-
-    // post('generate', data).then(({ error, ...res }) => {
-    //   if (error) {
-    //     return alert(error);
-    //   }
-
-    //   $("textarea#yaml").val(res.yaml);
-    //   genDot("actorsGraph", res.actors);
-    //   genDot("resourcesGraph", res.resources);
-    //   genDot("actionsGraph", res.actions);
-
-      // $("#matrix").load("output/main.html");
-
-    // });
-
-    // e.preventDefault();
+    e.preventDefault();
   });
 
   $(document).on('change', ':file', function() {

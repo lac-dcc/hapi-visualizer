@@ -30,19 +30,19 @@
     <div class="row h-90">
       <div class="container col-11 h-100">
         <div class="row h-100">
-          <div class="col-8 write-code mh-100">
+          <div class="col-lg-8 write-code mh-100">
             <h2>MAIN</h2>
             <form class="h-75">
               <div class="form-group h-100">
                 <fieldset id="file-main" class="disabled" disabled>
                   <div class="col-12 upload-main">
                     <div class="row">
-                      <div class="col-9" id="drop-main">
+                      <div class="col" id="drop-main">
                         <div class="row d-flex justify-content-between align-items-center" id="filename-row">
                           
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-3" style="min-width:100px; max-width: 180px;">
                         <label class="btn btn-primary btn-block" id="browse-main">
                           Browse&hellip; <input type="file" id="customFile2" style="display: none;">
                         </label>
@@ -53,23 +53,23 @@
                 <textarea id="code" class="form-control" rows="12"
                  placeholder="or Type your Hapi code..."> </textarea>
                  <div class="row mt-2 justify-content-end">
-                   <div class= "col-auto toggle-text" id="fileInput">
+                   <div class= "col toggle-text" id="fileInput">
                       Use file input
                    </div>
-                   <div class= "col-auto toggle">
+                   <div class= "toggle">
                     <label class="switch">
                       <input type="checkbox" id="toggle-main-code" checked>
                       <span class="slider round"></span>
                     </label>
                   </div>
-                  <div class= "col-auto toggle-text selected" id="typeCode">
+                  <div class= "col toggle-text selected" id="typeCode">
                     Typing code
                   </div>
                 </div>
               </div>
             </form>
           </div> 
-          <div class="col-4 submit-code">
+          <div class="col-lg-4 submit-code">
             <h2>IMPORT FILES</h2>
             <div class="row">
               <div class="col-10">
@@ -111,8 +111,8 @@
     </div>
   </div>
   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-lg w-100" role="document">
+      <div class="modal-content h-100">
         <div class="modal-header">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
@@ -129,8 +129,8 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <div class="tab-content" id="myTabContent">
+        <div class="modal-body h-100" style="overflow: auto">
+          <div class="tab-content h-100" id="myTabContent">
             <div class="tab-pane fade show active" id="yaml" role="tabpanel" aria-labelledby="home-tab">
               <textarea id="yaml-code" class="form-control" rows="12" disabled> </textarea>
             </div>
