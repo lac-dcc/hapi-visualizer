@@ -70,37 +70,46 @@
             </form>
           </div> 
           <div class="col-lg-4 submit-code">
-            <h2>IMPORT FILES</h2>
-            <div class="row">
-              <div class="col-10">
-                <span></span>
-              </div>
-              <div class="col-2">
-                <span id="counter">0/5</span>
+            <div class="row no-gutters">
+              <h2>IMPORT FILES</h2>
+              <div class="col">
+                <a class="btn btn-sm btn-primary collapsed" id="collapse-button" data-toggle="collapse" href="#drop-zone-collapse" role="button"></a>
               </div>
             </div>
-            <div class="row justify-content-center">
-              <div class="col-11 upload-drop-zone" id="drop-zone">
-                <ul class="list-group list-group-flush" id="upload-list">
 
-                </ul>
-                <form>
-                  <div class="form-row justify-content-end">
-                    <div class="col-auto" id="label-drop">
-                        Drop
+            <div class="collapse" id="drop-zone-collapse">
+              <div class="row">
+                <div class="col-10">
+                  <span></span>
+                </div>
+                <div class="col-2">
+                  <span id="counter">0/5</span>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-11 upload-drop-zone" id="drop-zone">
+                  <ul class="list-group list-group-flush" id="upload-list">
+  
+                  </ul>
+                  <form>
+                    <div class="form-row justify-content-end">
+                      <div class="col-auto" id="label-drop">
+                          Drop
+                      </div>
+                      <div class="col-auto" id="label-or">
+                          or
+                      </div>
+                      <div class="col-auto" id="browse">
+                        <label class="btn btn-primary mb-2" id="browse-button">
+                          Browse&hellip; <input type="file" id="customFile" style="display: none;" multiple>
+                        </label>
+                      </div>
                     </div>
-                    <div class="col-auto" id="label-or">
-                        or
-                    </div>
-                    <div class="col-auto" id="browse">
-                      <label class="btn btn-primary mb-2" id="browse-button">
-                        Browse&hellip; <input type="file" id="customFile" style="display: none;" multiple>
-                      </label>
-                    </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
+
             <div class="row form-row-last justify-content-end submit-buttons">
               <input type="button" name="register" id="preview" value="Preview" data-toggle="modal" data-target="#exampleModalLong">
               <input type="button" name="register" id="generate" value="Generate">

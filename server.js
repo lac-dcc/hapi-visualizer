@@ -3,7 +3,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { exec } = require('child_process');
 const fs = require('fs');
-const formidable = require('formidable')
+const formidable = require('formidable');
+const { exception } = require('console');
 
 // const outputDir = "static/output";
 const outputDir = "./static/output/";
@@ -64,41 +65,60 @@ app.post('/generate', jsonParser, function (req, res) {
 });
 
 function moveFiles(files){
-  if (Object.size(files) > 6){
-    return;
-  } else {
-    var oldpath = '';
-    var newpath = '';
-    
-    for(key in files){
-      oldpath = files[key].path;
-      newpath = files[key].name;
-      fs.rename(oldpath, outputDir+newpath, function (err) {
-        if (err) throw err;
-      });
-    }
+  var oldpath = '';
+  var newpath = '';
+  
+  for(key in files){
+    oldpath = files[key].path;
+    newpath = files[key].name;
+    fs.rename(oldpath, outputDir+newpath, function (err) {
+      if (err) throw err;
+    });
   }
 }
 
-app.post('/new/generate', function(req, res, next){
-  Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
+function removeOldFiles(dirPath) {
+  try { var files = fs.readdirSync(dirPath); }
+  catch(e) { return; }
+  if (files.length > 0)
+    for (var i = 0; i < files.length; i++) {
+      var filePath = dirPath + '/' + files[i];
+      if (fs.statSync(filePath).isFile())
+        fs.unlinkSync(filePath);
     }
-    return size;
-  }; 
+};
+
+function FileReceivingError(message){
+  this.message = 'Main file is required';
+  this.name = 'InexistentMain'
+}
+
+Object.size = function(obj) {
+  var size = 0, key;
+  for (key in obj) {
+      if (obj.hasOwnProperty(key)) size++;
+  }
+  return size;
+}; 
+
+app.post('/new/generate', function(req, res, next){
 
   var fs = require('fs');
   var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-      mainFileName = undefined;
+      var mainFileName = undefined;
       try{
-        moveFiles(files);
+        if (!files.main)
+          throw new FileReceivingError('Main file is required');
+        if(Object.size(files) > 6)
+          throw new FileReceivingError('Files quantity overflow');
+          
         mainFile = files.main.name.substr(0, files.main.name.lastIndexOf("."));
+        removeOldFiles(outputDir);
+        moveFiles(files);
       } catch (e){
-        res.status(500);
-        res.json({ error: { msg: 'Error at file moving' }});
+        eres.status(500);
+        res.json({ error: { msg: e.message}});
       }
       // mainFile = outputDir+files.main.name;
       exec(`java -jar ${program} ${outputDir+mainFile}.hp`,
@@ -130,4 +150,7 @@ app.post('/new/generate', function(req, res, next){
 
 app.listen(8080, () => {
   console.log("server running!");
+  if(!fs.existsSync(outputDir) ||
+    (fs.existsSync(outputDir) && !fs.statSync(outputDir).isDirectory()))
+    fs.mkdirSync(outputDir);
 });

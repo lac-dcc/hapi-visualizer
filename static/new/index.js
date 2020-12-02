@@ -48,6 +48,7 @@ function generate(){
   // append main file at formData
   formData.append('action', 'hapicode');
   formData.append('main', mainCode);
+
   // append importFiles at formData
   for(i=0; i< filesForUp.length; i++){
     formData.append('import'+(i+1), filesForUp[i]);
@@ -64,6 +65,13 @@ function receivingData() {
   }
 };
 
+function isHapiFile(path){
+  if(path.includes('.') &&
+    path.substr(path.lastIndexOf(".")+1) == 'hp'){
+      return true;
+  }
+  return false;
+}
 function success(res){
   $('textarea#yaml-code').text(res.yaml);
   $('#matrix').html(res.matrix);
@@ -133,6 +141,10 @@ function toggleMain(toAble, toDisable, toggleTrue, toggleFalse){
 
 var mainFile = undefined;
 function addMain(_mainFile){
+  if(!isHapiFile(_mainFile.name)){
+    // TODO: popup with error is not a Hapi File
+    return;
+  }
   filenameArea = document.getElementById('filename-row');
   if (mainFile != undefined){
     mainFile = _mainFile;
@@ -193,6 +205,13 @@ function addFiles(files){
   }
 
   var ul = document.getElementById('upload-list');
+
+  for(var i=0; i<size; i++){
+    if(!isHapiFile(files[i].name)){
+      // TODO: popup with error: Is not a Hapi file
+      return;
+    }
+  }
 
   for(var i=0; i<size; i++){
     var li = document.createElement('li');
