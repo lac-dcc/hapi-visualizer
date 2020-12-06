@@ -6,13 +6,10 @@ const fs = require('fs');
 const formidable = require('formidable');
 const { exception } = require('console');
 
-// const outputDir = "static/output";
 const outputDir = "./static/output/";
 
 const hapiFile = `${outputDir}/main.hp`;
 
-// const program = "legalease/legalease.jar legalease/config.yaml";
-// const program = `bin/hapi.jar ${hapiFile}`;
 const program = `bin/hapi.jar`;
 
 const resultHapiFile = `${outputDir}/main.yaml`;
@@ -24,45 +21,6 @@ const app = express();
 const jsonParser = bodyParser.json()
 
 app.use(express.static('static'));
-
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname + '/static/index.html'));
-// });
-
-app.post('/generate', jsonParser, function (req, res) {
-
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir);
-  }
-
-  const { hapi } = req.body;
-
-  fs.writeFileSync(hapiFile, hapi);
-
-  exec(`java -jar ${program}`,
-    (error, stdout, stderr) => {
-
-      if (error || stderr) {
-        console.log('stderr: ' + stderr);
-        res.json({ error: { msg: stderr, ...error } });
-        return;
-      }
-
-      const resultHapi = fs.readFileSync(resultHapiFile, "utf8");
-      const resultActors = fs.readFileSync(resultActorsFile, "utf8");
-      const resultResources = fs.readFileSync(resultResourcesFile, "utf8");
-      const resultActions = fs.readFileSync(resultActionsFile, "utf8");
-
-      res.json({
-        yaml: resultHapi,
-        actors: resultActors,
-        resources: resultResources,
-        actions: resultActions,
-        datamap: stdout
-      });
-    });
-
-});
 
 function moveFiles(files){
   var oldpath = '';
@@ -101,7 +59,7 @@ Object.size = function(obj) {
   return size;
 }; 
 
-app.post('/new/generate', function(req, res, next){
+app.post('/generate', function(req, res, next){
 
   var fs = require('fs');
   var form = new formidable.IncomingForm();
@@ -117,7 +75,7 @@ app.post('/new/generate', function(req, res, next){
         removeOldFiles(outputDir);
         moveFiles(files);
       } catch (e){
-        eres.status(500);
+        res.status(500);
         res.json({ error: { msg: e.message}});
       }
       // mainFile = outputDir+files.main.name;
