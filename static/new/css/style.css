@@ -340,6 +340,12 @@ body {
   margin-top: 32px;
   padding: 0 15px;
 }
+
+.container .submit-code .submit-buttons .disabled{
+  background: #678da8;
+  cursor: not-allowed;
+}
+
 .container .submit-code #generate {
   margin-left: 16px;
 }
@@ -348,7 +354,7 @@ body {
   border: none;
 }
 
-.modal.fade.show {
+#exampleModalLong.show {
   display: flex !important;
   display: -ms-flexbox !important;
 }
@@ -365,6 +371,24 @@ body {
   height: auto;
 }
 
+.overlay{
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1050;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+
+.spanner{
+  margin: auto;
+}
+
+
 @media (min-width: 992px) {
   .container .submit-code #drop-zone-collapse {
     display: block !important;
@@ -374,6 +398,7 @@ body {
     display: none;
   }
 }
+
 
 @media (max-width: 991.98px) {
 

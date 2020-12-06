@@ -31,6 +31,10 @@ function genDot(svgId, dot) {
 }
 
 function generate(){
+
+  // add d-flex class
+  $("div#load-overlay").addClass("d-flex");
+
   const request = new XMLHttpRequest();
   const formData = new FormData();
   var mainCode = undefined;
@@ -59,9 +63,14 @@ function generate(){
 }
 
 function receivingData() {
-  if (this.readyState == 4 && this.status == 200) {
-      var response = JSON.parse(this.responseText);
-      success(response);
+  if (this.readyState == 4){
+    var response = JSON.parse(this.responseText);
+    if (this.status == 200)
+      receivingSuccess(response);
+    else
+      receivingError(response);
+
+    $("div#load-overlay").removeClass("d-flex");
   }
 };
 
@@ -72,12 +81,29 @@ function isHapiFile(path){
   }
   return false;
 }
-function success(res){
+
+function receivingError(res){
+  var msg = "";
+  if(!res.error || !res.error.msg){
+    // unknown error
+    msg = "Unknown error";
+  } else {
+    msg = res.error.msg;
+  }
+  $('textarea#error-message').text(msg);
+  $('#errorModal').modal('show');
+}
+
+function receivingSuccess(res){
   $('textarea#yaml-code').text(res.yaml);
   $('#matrix').html(res.matrix);
   genDot('actorsGraph', res.actors);
   genDot('resourcesGraph', res.resources);
   genDot('actionsGraph', res.actions);
+  $('input#preview').removeClass('disabled');
+  $('input#preview').removeAttr('disabled');
+  $('#exampleModalLong').modal('show');
+  
 }
 
 $(document).ready(function () {
