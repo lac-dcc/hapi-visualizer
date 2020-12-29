@@ -25,7 +25,7 @@ app.use(express.static('static'));
 function moveFiles(files){
   var oldpath = '';
   var newpath = '';
-  
+
   for(key in files){
     oldpath = files[key].path;
     newpath = files[key].name;
@@ -57,7 +57,7 @@ Object.size = function(obj) {
       if (obj.hasOwnProperty(key)) size++;
   }
   return size;
-}; 
+};
 
 app.post('/generate', function(req, res, next){
 
@@ -70,7 +70,7 @@ app.post('/generate', function(req, res, next){
           throw new FileReceivingError('Main file is required');
         if(Object.size(files) > 6)
           throw new FileReceivingError('Files quantity overflow');
-          
+
         mainFile = files.main.name.substr(0, files.main.name.lastIndexOf("."));
         removeOldFiles(outputDir);
         moveFiles(files);
@@ -92,17 +92,19 @@ app.post('/generate', function(req, res, next){
         const resultActors = fs.readFileSync(resultActorsFile, "utf8");
         const resultResources = fs.readFileSync(resultResourcesFile, "utf8");
         const resultActions = fs.readFileSync(resultActionsFile, "utf8");
-        const resultMatrix = fs.readFileSync(`${outputDir+mainFile}.html`, "utf8");
+        const resultHtmlMatrix = fs.readFileSync(`${outputDir+mainFile}.html`, "utf8");
+        const resultJsonMatrix = fs.readFileSync(`${outputDir+mainFile}.json`, "utf8");
 
         res.json({
           yaml: resultHapi,
           actors: resultActors,
           resources: resultResources,
           actions: resultActions,
-          matrix: resultMatrix,
+          htmlMatrix: resultHtmlMatrix,
+          jsonMatrix: resultJsonMatrix,
           datamap: stdout
         });
-      });    
+      });
     });
 });
 

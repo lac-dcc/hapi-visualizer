@@ -193,7 +193,7 @@ body {
   height: 34px;
 }
 
-.container .write-code .switch input { 
+.container .write-code .switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -291,7 +291,7 @@ body {
 
 .upload-drop-zone .label-blue{
   color: #53c83c !important;
-} 
+}
 
 .upload-drop-zone #label-or,
 .upload-drop-zone #label-drop {
@@ -408,7 +408,7 @@ body {
     border-top-left-radius: 10px;
     padding: 20px;
   }
-  
+
   .container .submit-code {
     border-top-right-radius: 0;
     border-bottom-left-radius: 10px;
@@ -439,4 +439,18 @@ body {
   .container .submit-code #collapse-button.collapsed::after{
     content: "+";
   }
+}
+
+#matrixDisplayArea table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#matrixDisplayArea th, td {
+	padding: 8px 0px;
+	text-align: left;
+}
+
+#matrixDisplayArea p {
+	margin: 4px 0;
 }

@@ -96,14 +96,122 @@ function receivingError(res){
 
 function receivingSuccess(res){
   $('textarea#yaml-code').text(res.yaml);
-  $('#matrix').html(res.matrix);
+
+  // $('#matrix').html(generateMatrixDisplay(res.htmlMatrix));
+	// Change this to a more standard approach (add basic html structure in
+	//   index.html, and just insert the matrix in the right field through this
+	//   javascript.
+	addMatrixDisplay(res.jsonMatrix);
+
   genDot('actorsGraph', res.actors);
   genDot('resourcesGraph', res.resources);
   genDot('actionsGraph', res.actions);
   $('input#preview').removeClass('disabled');
   $('input#preview').removeAttr('disabled');
   $('#exampleModalLong').modal('show');
-  
+
+}
+
+// Output from parsing json matrix received from Hapi program
+// All of these are to be global objects, so that it may be possible to
+//   dynamically filter the matrix, without having to find and parse the json
+//   file every time.
+var jsonMatrix = undefined;
+var matrixActors = undefined;
+var matrixResources = undefined;
+var matrixActions = undefined;
+
+// This function adds the first display of the Matrix, which shall be
+//   unfiltered.
+// That means that all the actors, resources and actions should be displayed.
+function addMatrixDisplay(jsonStringMatrix) {
+	// Create HTML Object from JSON object
+	jsonMatrix = JSON.parse(jsonStringMatrix);
+	matrixActors = Object.keys(jsonMatrix);
+	matrixResources = Object.keys(jsonMatrix[matrixActors[0]]);
+	matrixActions = Object.keys(jsonMatrix[matrixActors[0]][matrixResources[0]]);
+
+	updateMatrixDisplay(matrixActors, matrixResources, matrixActions);
+}
+
+// Adds checkboxes into the Hapi matrix area (preferably into a modal created
+//   specifically for this purpose).
+// The idea is to create three bootstrap columns, one for each lattice - actors,
+//   resources, actions.
+// Each actor, resource and action shall have its own checkbox, to determine
+//   whether or not to display it in the matrix.
+// The default status of the checkboxes shall be "checked".
+function addMatrixCheckboxes() {
+
+}
+
+// Gets information on checked checkboxes to determine which rows / columns and
+//   actions should be displayed.
+// Whenever it is decided to implement filtering based on user input text, this
+//   function should also handle this factor (that is, take into account the
+//   text input).
+// Delegates task of actually changing html elements to function updateMatrix
+function filterMatrix() {
+	var filteredActors = undefined;
+	var filteredResources = undefined;
+	var filteredActions = undefined;
+
+
+	updateMatrixDisplay(filteredActors, filteredResources, filteredActions);
+}
+
+function updateMatrixDisplay(actors, resources, actions) {
+	// Clear current matrix
+	$("#matrixDisplayArea").html("");
+
+	// Create new one from scratch
+	var matrixTable = document.createElement("table");
+
+	// Fill the table
+	var newRow = document.createElement("tr"); // Top row
+	var newTh = document.createElement("th"); // Upper left corner
+
+	newRow.appendChild(newTh);
+	for (i in resources) {
+		newTh = document.createElement("th");
+		newTh.innerHTML = resources[i];
+		newRow.appendChild(newTh);
+	}
+	matrixTable.appendChild(newRow);
+
+	var newTd = undefined;
+	var newDiv = undefined;
+	// Now the rest of the rows, one by one
+	for(i in actors) {
+		newRow = document.createElement("tr");
+
+		// Line header
+		newTd = document.createElement("td");
+		newTd.innerHTML = actors[i];
+		newRow.appendChild(newTd);
+
+		// Adding tds (each action status)
+		for (j in resources) {
+			newTd = document.createElement("td");
+			for (k in actions) {
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("align", "center");
+
+				if (jsonMatrix[actors[i]][resources[j]][actions[k]] === 0)
+					newDiv.setAttribute("style", "background-color: red");
+				else
+					newDiv.setAttribute("style", "background-color: blue");
+
+				newDiv.innerHTML = actions[k];
+				newTd.appendChild(newDiv);
+			}
+			newRow.appendChild(newTd);
+		}
+		matrixTable.appendChild(newRow);
+	}
+
+	// Finally, insert table in appropriate area
+	document.getElementById("matrixDisplayArea").appendChild(matrixTable);
 }
 
 $(document).ready(function () {
@@ -138,12 +246,12 @@ $(document).ready(function () {
     var dropArea = document.getElementById('file-main');
     var fileInputToggleLabel = document.getElementById('fileInput');
     var typeCodeToggleLabel = document.getElementById('typeCode');
-    
+
     if(ev.target.checked){
       dropArea.setAttribute('disabled', '');
       textArea.removeAttribute('disabled');
       toggleMain(textArea, dropArea, typeCodeToggleLabel, fileInputToggleLabel);
-      
+
     } else {
       dropArea.removeAttribute('disabled');
       textArea.setAttribute('disabled', '');
@@ -156,6 +264,11 @@ $(document).ready(function () {
     if(!toggleLabel.classList.contains('selected'))
       document.getElementById('toggle-main-code').click();
   });
+
+	// Matrix filter
+	$("#matrixFilterButton").click(function (e) {
+		filterMatrix();
+	});
 });
 
 function toggleMain(toAble, toDisable, toggleTrue, toggleFalse){
@@ -205,7 +318,7 @@ function removeFile(removedLi){
   console.log(removedLi)
   // get index to remove
   var index = parseInt(removedLi.getAttribute('index'));
-  
+
   // remove the indexed element from the <ul>
   var ul = removedLi.parentElement;
   ul.removeChild(removedLi);
@@ -242,11 +355,11 @@ function addFiles(files){
   for(var i=0; i<size; i++){
     var li = document.createElement('li');
     li.className = 'list-group-item d-flex justify-content-between align-items-center'
-    
+
     var span = document.createElement('span');
     span.appendChild(document.createTextNode(files[i].name));
     li.appendChild(span);
-    
+
     var button = document.createElement('button');
     button.addEventListener('click', function(ev){
       removeFile(ev.target.parentElement);
@@ -255,8 +368,8 @@ function addFiles(files){
     button.appendChild(document.createTextNode('X'));
     button.setAttribute('type', 'button');
     li.appendChild(button);
-    
-    
+
+
     var elemNumber = filesForUp.length+i;
     li.setAttribute('index', elemNumber);
     ul.appendChild(li);
@@ -292,7 +405,7 @@ function updateCounter(){
     $('#label-drop')[0].className = 'col-auto';
     return false;
   }
-    
+
   dropZone.ondragenter = preventDrag;
 
   dropZone.ondragstart = preventDrag;
@@ -332,7 +445,7 @@ function preventDrag(e){
     this.className = 'col-9';
     return false;
   }
-    
+
   dropMain.ondragenter = preventDragMain;
 
   dropMain.ondragstart = preventDragMain;

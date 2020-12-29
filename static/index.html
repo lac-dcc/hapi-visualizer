@@ -24,10 +24,10 @@
 </head>
 
 <body>
-  
+
   <div class="container-fluid h-98">
     <div class="row justify-content-center header">
-      <div class="rounded"> 
+      <div class="rounded">
         <img src="new-logo.svg" class="logo-header" alt="My image"/>
       </div>
     </div>
@@ -43,7 +43,7 @@
                     <div class="row">
                       <div class="col" id="drop-main">
                         <div class="row d-flex justify-content-between align-items-center" id="filename-row">
-                          
+
                         </div>
                       </div>
                       <div class="col-3" style="min-width:100px; max-width: 180px;">
@@ -72,7 +72,7 @@
                 </div>
               </div>
             </form>
-          </div> 
+          </div>
           <div class="col-lg-4 submit-code">
             <div class="row no-gutters">
               <h2>IMPORT FILES</h2>
@@ -93,7 +93,7 @@
               <div class="row justify-content-center">
                 <div class="col-11 upload-drop-zone" id="drop-zone">
                   <ul class="list-group list-group-flush" id="upload-list">
-  
+
                   </ul>
                   <form>
                     <div class="form-row justify-content-end">
@@ -154,7 +154,13 @@
             <div class="tab-pane fade show active" id="yaml" role="tabpanel" aria-labelledby="home-tab">
               <textarea id="yaml-code" class="form-control" rows="12" disabled> </textarea>
             </div>
-            <div class="tab-pane fade" id="matrix" role="tabpanel" aria-labelledby="profile-tab">Matrix</div>
+            <div class="container fade" id="matrix" role="tabpanel" aria-labelledby="profile-tab">
+							<div id="matrixFilterForm" class="row-align-start mb-3">
+								<input type="button" name="register" id="matrixFilterButton" value="Filter">
+							</div>
+							<div id="matrixDisplayArea">
+							</div>
+						</div>
             <div class="tab-pane fade" id="lattices" role="tabpanel" aria-labelledby="contact-tab">
               <div class="row justify-content-center">
                 <div class="">
