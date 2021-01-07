@@ -142,9 +142,54 @@ function addMatrixDisplay(jsonStringMatrix) {
 //   whether or not to display it in the matrix.
 // The default status of the checkboxes shall be "checked".
 function addMatrixCheckboxes() {
+    // Targeted table body
+    const t = $("#matrixFilterForm tbody").get()[0];
 
+    // Have to pick the largest array length as the number of rows
+    const numRows = Math.max(matrixActors.length, matrixResources.length,
+			     matrixActions.length);
+
+    // Add basic framework
+    var trows = new Array();
+    var newTr = undefined;
+    var newTd = undefined;
+    for (i = 0; i < numRows; i++) {
+	newTr = document.createElement("tr");
+	trows.push(newTr);
+	
+	for (j = 0; j < 3; j++) {
+	    newTd = document.createElement("td");
+	    newTr.appendChild(newTd);
+	}
+	t.appendChild(newTr);
+    }
+
+    // Now, for each actor, resource and actions, we must add its respective
+    //   checkboxes.
+    [matrixActors, matrixResources, matrixActions]
+	.forEach( function (arr, index) {
+	    var newInput = undefined;
+	    var newSpan = undefined;
+	    // Not actually "new", as it is created previously
+	    var curTd = undefined;
+	    
+	    for (i = 0; i < arr.length; i++) {
+		
+		newInput = document.createElement("input");
+		newInput.setAttribute("type", "checkbox");
+		newInput.toggleAttribute("checked"); // checked by default
+		
+		newSpan = document.createElement("span");
+		newSpan.innerHTML = arr[i];
+
+		// "index" here is the current lattice beign worked on
+		curTd = trows[i].children[index];
+		curTd.appendChild(newInput);
+		curTd.appendChild(newSpan);
+	    }
+	});		
 }
-
+    
 // Gets information on checked checkboxes to determine which rows / columns and
 //   actions should be displayed.
 // Whenever it is decided to implement filtering based on user input text, this
@@ -152,12 +197,21 @@ function addMatrixCheckboxes() {
 //   text input).
 // Delegates task of actually changing html elements to function updateMatrix
 function filterMatrix() {
-	var filteredActors = undefined;
-	var filteredResources = undefined;
-	var filteredActions = undefined;
+    var filteredActors = undefined;
+    var filteredResources = undefined;
+    var filteredActions = undefined;
 
+    function filterLattice(index) {
+	return $(`#matrixFilterForm td:nth-child(${index}) input`).filter(
+	    function(index) { return this.checked }).siblings().get()
+	    .map( el => el.innerHTML);
+    }
+    
+    filteredActors = filterLattice(1);
+    filteredResources = filterLattice(2);
+    filteredActions = filterLattice(3);
 
-	updateMatrixDisplay(filteredActors, filteredResources, filteredActions);
+    updateMatrixDisplay(filteredActors, filteredResources, filteredActions);
 }
 
 function updateMatrixDisplay(actors, resources, actions) {
@@ -171,6 +225,7 @@ function updateMatrixDisplay(actors, resources, actions) {
 	var newRow = document.createElement("tr"); // Top row
 	var newTh = document.createElement("th"); // Upper left corner
 
+    // Generating column headers
 	newRow.appendChild(newTh);
 	for (i in resources) {
 		newTh = document.createElement("th");
@@ -186,9 +241,9 @@ function updateMatrixDisplay(actors, resources, actions) {
 		newRow = document.createElement("tr");
 
 		// Line header
-		newTd = document.createElement("td");
-		newTd.innerHTML = actors[i];
-		newRow.appendChild(newTd);
+		newTh = document.createElement("th");
+		newTh.innerHTML = actors[i];
+		newRow.appendChild(newTh);
 
 		// Adding tds (each action status)
 		for (j in resources) {
@@ -198,9 +253,9 @@ function updateMatrixDisplay(actors, resources, actions) {
 				newDiv.setAttribute("align", "center");
 
 				if (jsonMatrix[actors[i]][resources[j]][actions[k]] === 0)
-					newDiv.setAttribute("style", "background-color: red");
+				    newDiv["style"]["backgroundColor"] = "red";
 				else
-					newDiv.setAttribute("style", "background-color: blue");
+				    newDiv["style"]["backgroundColor"] = "blue";
 
 				newDiv.innerHTML = actions[k];
 				newTd.appendChild(newDiv);

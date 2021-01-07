@@ -441,16 +441,44 @@ body {
   }
 }
 
-#matrixDisplayArea table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
+/* Hapi Matrix */
+
+#matrixFilterForm * {
+    border: 0;
 }
 
-#matrixDisplayArea th, td {
-	padding: 8px 0px;
-	text-align: left;
+#matrixFilterForm table {
+    width: 100%;
+    margin-bottom: 30px;
 }
 
-#matrixDisplayArea p {
-	margin: 4px 0;
+#matrixFilterForm th {
+    text-align: center;
+    font-size: x-large;
 }
+
+#matrixFilterForm td {
+    text-align: left;
+    font-size: large;
+}
+
+#matrixFilterForm td input[type="checkbox"] {
+    width: 1em;
+    height: 1em;
+    margin: 8px;
+}
+
+#matrixFilterForm td span {
+    vertical-align: text-bottom;
+}
+
+#matrixDisplayArea table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#matrixDisplayArea th, #matrixDisplayArea td {
+    border: 1px solid black;
+}
+
+/* End - Hapi Matrix */

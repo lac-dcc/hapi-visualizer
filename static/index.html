@@ -155,8 +155,18 @@
               <textarea id="yaml-code" class="form-control" rows="12" disabled> </textarea>
             </div>
             <div class="container fade" id="matrix" role="tabpanel" aria-labelledby="profile-tab">
-							<div id="matrixFilterForm" class="row-align-start mb-3">
-								<input type="button" name="register" id="matrixFilterButton" value="Filter">
+							<div id="matrixFilterArea">
+							  <form id="matrixFilterForm">
+							    <table>
+							      <tbody>							
+								<tr>
+								  <th>Actors</th>
+								  <th>Resources</th>
+								  <th>Actions</th>
+								</tr>
+							      </tbody>
+							    </table>
+							  </form>
 							</div>
 							<div id="matrixDisplayArea">
 							</div>
