@@ -443,8 +443,8 @@ body {
 
 /* Hapi Matrix */
 
-#matrixFilterForm * {
-    border: 0;
+#matrix.container {
+    padding-bottom: 20px;
 }
 
 #matrixFilterForm table {
@@ -470,6 +470,11 @@ body {
 
 #matrixFilterForm td span {
     vertical-align: text-bottom;
+}
+
+#matrixFilterFormOps {
+    text-align: end;
+    margin-bottom: 30px;
 }
 
 #matrixDisplayArea table {

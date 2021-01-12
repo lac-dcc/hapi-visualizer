@@ -97,12 +97,9 @@ function receivingError(res){
 function receivingSuccess(res){
   $('textarea#yaml-code').text(res.yaml);
 
-  // $('#matrix').html(generateMatrixDisplay(res.htmlMatrix));
-	// Change this to a more standard approach (add basic html structure in
-	//   index.html, and just insert the matrix in the right field through this
-	//   javascript.
-	addMatrixDisplay(res.jsonMatrix);
-
+  addMatrixDisplay(res.jsonMatrix);
+  updateMatrixCheckboxes();
+    
   genDot('actorsGraph', res.actors);
   genDot('resourcesGraph', res.resources);
   genDot('actionsGraph', res.actions);
@@ -141,7 +138,12 @@ function addMatrixDisplay(jsonStringMatrix) {
 // Each actor, resource and action shall have its own checkbox, to determine
 //   whether or not to display it in the matrix.
 // The default status of the checkboxes shall be "checked".
-function addMatrixCheckboxes() {
+function updateMatrixCheckboxes() {
+    // Clear current checkboxes
+    $("#matrixFilterForm tbody>tr").filter(
+	function (index) { return index > 0 })
+	.get().forEach( el => el.remove())
+
     // Targeted table body
     const t = $("#matrixFilterForm tbody").get()[0];
 
@@ -253,9 +255,9 @@ function updateMatrixDisplay(actors, resources, actions) {
 				newDiv.setAttribute("align", "center");
 
 				if (jsonMatrix[actors[i]][resources[j]][actions[k]] === 0)
-				    newDiv["style"]["backgroundColor"] = "red";
+				    newDiv["style"]["backgroundColor"] = "#C8C8C8";
 				else
-				    newDiv["style"]["backgroundColor"] = "blue";
+				    newDiv["style"]["backgroundColor"] = "#3786BD";
 
 				newDiv.innerHTML = actions[k];
 				newTd.appendChild(newDiv);
@@ -320,10 +322,11 @@ $(document).ready(function () {
       document.getElementById('toggle-main-code').click();
   });
 
-	// Matrix filter
-	$("#matrixFilterButton").click(function (e) {
-		filterMatrix();
-	});
+    // Matrix filter
+    $("#matrixFilterFormOps input[name=Filter]").click(function (e) {
+	filterMatrix();
+	e.preventDefault();
+    });
 });
 
 function toggleMain(toAble, toDisable, toggleTrue, toggleFalse){
