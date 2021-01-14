@@ -250,7 +250,7 @@ body {
 }
 
 .container .submit-code h2 {
-	color: #3786bd;
+  color: #3786bd;
 }
 
 .container .submit-code .upload-drop-zone {
@@ -264,11 +264,11 @@ body {
 }
 
 .container .submit-code span {
-	font-weight: 600;
-	font-size: 15px;
-	color: #666;
-	display: block;
-	margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #666;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .container .submit-code .upload-drop-zone .list-group {
@@ -443,47 +443,127 @@ body {
 
 /* Hapi Matrix */
 
+#matrix {
+  flex-flow: column;
+}
+
 #matrix.container {
-    padding-bottom: 20px;
+  margin: 0;
+  padding-bottom: 20px;
 }
 
-#matrixFilterForm table {
-    width: 100%;
-    margin-bottom: 30px;
+#matrixFilterArea {
+  margin-bottom: 24px;
 }
 
-#matrixFilterForm th {
-    text-align: center;
-    font-size: x-large;
+#matrixFilterHeader {
+  height: 48px;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: x-large;
+  font-weight: bold;
 }
 
-#matrixFilterForm td {
-    text-align: left;
-    font-size: large;
+#matrixFilterHeader>div {
+  text-align: center;
 }
 
-#matrixFilterForm td input[type="checkbox"] {
-    width: 1em;
-    height: 1em;
-    margin: 8px;
+#matrixFilterBody {
+  padding: 0;
+  margin: 0 0 12px 0;
 }
 
-#matrixFilterForm td span {
-    vertical-align: text-bottom;
+#matrixFilterBody input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  margin: 8px;
 }
 
-#matrixFilterFormOps {
-    text-align: end;
-    margin-bottom: 30px;
+#matrixFilterBody>div>div.row {
+  word-break: break-word;
+  align-items: center;
 }
 
-#matrixDisplayArea table {
-    width: 100%;
-    border-collapse: collapse;
+#matrixFilterAreaOps {
+  flex-flow: row-reverse;
+  margin-bottom: 30px;
 }
 
-#matrixDisplayArea th, #matrixDisplayArea td {
-    border: 1px solid black;
+#matrixFilterAreaOps input{
+  background: #3786bd;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: auto;
+  border: none;
+  margin: 0 10px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  padding: 4px 8px;
+}
+
+#matrixDisplayArea {
+  display: flex;
+  flex-flow: column;
+  overflow: overlay;
+}
+
+#matrixDisplayLegend {
+  margin-bottom: 8px;
+}
+
+.legendColumn {
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.legendColumn>div {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+}
+
+/* This table styling became very complicated, but it is
+ *   so that the header may properly float over the rest
+ *   of the table, when the region is scrolled.
+ */
+#matrixDisplayTable {
+  overflow: auto;
+}
+
+#matrixDisplayTable table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+#matrixDisplayTable th:first-child {
+  border-left: 1px solid;
+}
+
+#matrixDisplayTable thead th {
+  border-top: 1px solid;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+#matrixDisplayTable th {
+  text-align: center;
+}
+
+#matrixDisplayTable thead th,
+#matrixDisplayTable tbody th,
+#matrixDisplayTable tbody td {
+  border-color: black;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+#matrixDisplayTable td {
+  padding: 0;
 }
 
 /* End - Hapi Matrix */

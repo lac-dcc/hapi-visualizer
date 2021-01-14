@@ -119,16 +119,17 @@ var matrixResources = undefined;
 var matrixActions = undefined;
 
 // This function adds the first display of the Matrix, which shall be
-//   unfiltered.
-// That means that all the actors, resources and actions should be displayed.
+//   unfiltered. That means that all the actors, resources and actions should be
+//   displayed.
+// Also, it initializes the variable jsonMatrix
 function addMatrixDisplay(jsonStringMatrix) {
-	// Create HTML Object from JSON object
-	jsonMatrix = JSON.parse(jsonStringMatrix);
-	matrixActors = Object.keys(jsonMatrix);
-	matrixResources = Object.keys(jsonMatrix[matrixActors[0]]);
-	matrixActions = Object.keys(jsonMatrix[matrixActors[0]][matrixResources[0]]);
+  // Create HTML Object from JSON object
+  jsonMatrix = JSON.parse(jsonStringMatrix);
+  matrixActors = Object.keys(jsonMatrix);
+  matrixResources = Object.keys(jsonMatrix[matrixActors[0]]);
+  matrixActions = Object.keys(jsonMatrix[matrixActors[0]][matrixResources[0]]);
 
-	updateMatrixDisplay(matrixActors, matrixResources, matrixActions);
+  updateMatrixDisplay(matrixActors, matrixResources, matrixActions);
 }
 
 // Adds checkboxes into the Hapi matrix area (preferably into a modal created
@@ -139,57 +140,29 @@ function addMatrixDisplay(jsonStringMatrix) {
 //   whether or not to display it in the matrix.
 // The default status of the checkboxes shall be "checked".
 function updateMatrixCheckboxes() {
-    // Clear current checkboxes
-    $("#matrixFilterForm tbody>tr").filter(
-	function (index) { return index > 0 })
-	.get().forEach( el => el.remove())
+  // Clear current checkboxes
+  $("#matrixFilterBody>div>*").get().forEach(el => el.remove());
 
-    // Targeted table body
-    const t = $("#matrixFilterForm tbody").get()[0];
-
-    // Have to pick the largest array length as the number of rows
-    const numRows = Math.max(matrixActors.length, matrixResources.length,
-			     matrixActions.length);
-
-    // Add basic framework
-    var trows = new Array();
-    var newTr = undefined;
-    var newTd = undefined;
-    for (i = 0; i < numRows; i++) {
-	newTr = document.createElement("tr");
-	trows.push(newTr);
-	
-	for (j = 0; j < 3; j++) {
-	    newTd = document.createElement("td");
-	    newTr.appendChild(newTd);
-	}
-	t.appendChild(newTr);
-    }
-
-    // Now, for each actor, resource and actions, we must add its respective
-    //   checkboxes.
-    [matrixActors, matrixResources, matrixActions]
-	.forEach( function (arr, index) {
-	    var newInput = undefined;
-	    var newSpan = undefined;
-	    // Not actually "new", as it is created previously
-	    var curTd = undefined;
-	    
-	    for (i = 0; i < arr.length; i++) {
-		
-		newInput = document.createElement("input");
-		newInput.setAttribute("type", "checkbox");
-		newInput.toggleAttribute("checked"); // checked by default
-		
-		newSpan = document.createElement("span");
-		newSpan.innerHTML = arr[i];
-
-		// "index" here is the current lattice beign worked on
-		curTd = trows[i].children[index];
-		curTd.appendChild(newInput);
-		curTd.appendChild(newSpan);
-	    }
-	});		
+  // Now, for each actor, resource and actions, we must add its respective
+  //   checkboxes.
+  [matrixActors, matrixResources, matrixActions]
+    .forEach( function (arr, index) {
+      arr.forEach( function (el) {
+        var newRow = document.createElement("div");
+        newRow.classList.add("row");
+    
+        var newInput = document.createElement("input");
+        newInput.setAttribute("type", "checkbox");
+        newInput.toggleAttribute("checked");
+    
+        var newSpan = document.createElement("span");
+        newSpan.innerHTML = el;
+    
+        newRow.appendChild(newInput);
+        newRow.appendChild(newSpan);
+        document.getElementById("matrixFilterBody").children[index].appendChild(newRow)
+      })
+  });    
 }
     
 // Gets information on checked checkboxes to determine which rows / columns and
@@ -204,9 +177,9 @@ function filterMatrix() {
     var filteredActions = undefined;
 
     function filterLattice(index) {
-	return $(`#matrixFilterForm td:nth-child(${index}) input`).filter(
-	    function(index) { return this.checked }).siblings().get()
-	    .map( el => el.innerHTML);
+      return $(`#matrixFilterBody>div:nth-child(${index}) input`).filter(
+        function() { return this.checked }).siblings().get()
+        .map(el => el.innerHTML);
     }
     
     filteredActors = filterLattice(1);
@@ -217,58 +190,62 @@ function filterMatrix() {
 }
 
 function updateMatrixDisplay(actors, resources, actions) {
-	// Clear current matrix
-	$("#matrixDisplayArea").html("");
+  // Clear current matrix
+  $("#matrixDisplayTable").html("");
 
-	// Create new one from scratch
-	var matrixTable = document.createElement("table");
+  // Create new one from scratch
+  var matrixTable = document.createElement("table");
 
-	// Fill the table
-	var newRow = document.createElement("tr"); // Top row
-	var newTh = document.createElement("th"); // Upper left corner
-
+  // Fill the table
+  var newRow = document.createElement("tr"); // Top row
+  var newTh = document.createElement("th"); // Upper left corner
+    var newThead = document.createElement("thead");
+    
     // Generating column headers
-	newRow.appendChild(newTh);
-	for (i in resources) {
-		newTh = document.createElement("th");
-		newTh.innerHTML = resources[i];
-		newRow.appendChild(newTh);
-	}
-	matrixTable.appendChild(newRow);
+  newRow.appendChild(newTh);
+  for (i in resources) {
+    newTh = document.createElement("th");
+    newTh.innerHTML = resources[i];
+    newRow.appendChild(newTh);
+  }
+    newThead.appendChild(newRow);
+  matrixTable.appendChild(newThead);
 
-	var newTd = undefined;
-	var newDiv = undefined;
-	// Now the rest of the rows, one by one
-	for(i in actors) {
-		newRow = document.createElement("tr");
+    var newTbody = document.createElement("tbody");
+  var newTd = undefined;
+  var newDiv = undefined;
+  // Now the rest of the rows, one by one
+  for(i in actors) {
+    newRow = document.createElement("tr");
 
-		// Line header
-		newTh = document.createElement("th");
-		newTh.innerHTML = actors[i];
-		newRow.appendChild(newTh);
+    // Line header
+    newTh = document.createElement("th");
+    newTh.innerHTML = actors[i];
+    newRow.appendChild(newTh);
 
-		// Adding tds (each action status)
-		for (j in resources) {
-			newTd = document.createElement("td");
-			for (k in actions) {
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("align", "center");
+    // Adding tds (each action status)
+    for (j in resources) {
+      newTd = document.createElement("td");
+      for (k in actions) {
+        newDiv = document.createElement("div");
+        newDiv.setAttribute("align", "center");
 
-				if (jsonMatrix[actors[i]][resources[j]][actions[k]] === 0)
-				    newDiv["style"]["backgroundColor"] = "#C8C8C8";
-				else
-				    newDiv["style"]["backgroundColor"] = "#3786BD";
+        if (jsonMatrix[actors[i]][resources[j]][actions[k]] === 0)
+          newDiv["style"]["backgroundColor"] = "#C8C8C8";
+        else
+          newDiv["style"]["backgroundColor"] = "#3786BD";
 
-				newDiv.innerHTML = actions[k];
-				newTd.appendChild(newDiv);
-			}
-			newRow.appendChild(newTd);
-		}
-		matrixTable.appendChild(newRow);
-	}
+        newDiv.innerHTML = actions[k];
+        newTd.appendChild(newDiv);
+      }
+      newRow.appendChild(newTd);
+    }
+    newTbody.appendChild(newRow);
+  }
+    matrixTable.appendChild(newTbody);
 
-	// Finally, insert table in appropriate area
-	document.getElementById("matrixDisplayArea").appendChild(matrixTable);
+  // Finally, insert table in appropriate area
+  document.getElementById("matrixDisplayTable").appendChild(matrixTable);
 }
 
 $(document).ready(function () {
@@ -322,11 +299,20 @@ $(document).ready(function () {
       document.getElementById('toggle-main-code').click();
   });
 
-    // Matrix filter
-    $("#matrixFilterFormOps input[name=Filter]").click(function (e) {
-	filterMatrix();
-	e.preventDefault();
-    });
+  // Matrix filter events
+  $("#matrixFilterAreaOps input[name=Filter]").click(function (e) {
+    filterMatrix();
+    e.preventDefault();
+  });
+
+  $("#matrixFilterAreaOps input[name=ClearAll]").click(
+    _ =>
+      $("#matrixFilterBody input").get().forEach(el => el.checked = false)
+  )                
+  $("#matrixFilterAreaOps input[name=SelectAll]").click(
+    _ =>
+      $("#matrixFilterBody input").get().forEach(el => el.checked = true)
+  )               
 });
 
 function toggleMain(toAble, toDisable, toggleTrue, toggleFalse){

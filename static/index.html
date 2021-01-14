@@ -153,28 +153,54 @@
           <div class="tab-content h-100" id="myTabContent">
             <div class="tab-pane fade show active" id="yaml" role="tabpanel" aria-labelledby="home-tab">
               <textarea id="yaml-code" class="form-control" rows="12" disabled> </textarea>
+            </div>      
+            <div class="tab-pane container fade" id="matrix" role="tabpanel" aria-labelledby="profile-tab">
+              <div id="matrixFilterArea" class="col">
+                <div id="matrixFilterHeader" class="row">
+                  <div class="col">
+                    Actors
+                  </div>
+                  <div class="col">
+                    Resources
+                  </div>
+                  <div class="col">
+                    Actions
+                  </div>
+                </div>
+		
+                <div id="matrixFilterBody" class="row">
+                  <div id="matrixFilterActorsCheckboxes" class="col">
+                  </div>
+                  <div id="matrixFilterResourcesCheckboxes" class="col">
+                  </div>
+                  <div id="matrixFilterActionsCheckboxes" class="col">
+                  </div>
+                </div>
+    
+                <div id="matrixFilterAreaOps" class="row">
+                  <input name="Filter" type="submit" value="Filter">
+                  <input name="ClearAll" type="button" value="Clear All">
+                  <input name="SelectAll" type="button" value="Select All">
+                </div>    
+              </div>
+	      
+              <div id="matrixDisplayArea" class="col">
+
+                <div id="matrixDisplayLegend" class="row">
+                <div class="legendColumn">
+                  <div style="background-color:#3786BD;"></div>
+                  <span> allowed </span>
+                </div>
+                <div class="legendColumn">
+                  <div style="background-color:#C8C8C8;"></div>
+                  <span> not allowed</span>
+                </div>
+                </div>
+		
+                <div id="matrixDisplayTable" class="row">
+                </div>
+              </div>      
             </div>
-            <div class="container fade" id="matrix" role="tabpanel" aria-labelledby="profile-tab">
-							<div id="matrixFilterArea">
-							  <form id="matrixFilterForm">
-							    <table>
-							      <tbody>							
-								<tr>
-								  <th>Actors</th>
-								  <th>Resources</th>
-								  <th>Actions</th>
-								</tr>
-							      </tbody>
-							    </table>
-							    <div id="matrixFilterFormOps">
-							      <input name="Filter" type="submit" value="Filter">
-							    </div>
-							    
-							  </form>
-							</div>
-							<div id="matrixDisplayArea">
-							</div>
-						</div>
             <div class="tab-pane fade" id="lattices" role="tabpanel" aria-labelledby="contact-tab">
               <div class="row justify-content-center">
                 <div class="">
