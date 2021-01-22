@@ -99,7 +99,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 0;
-}
+n}
 .container .write-code #drop-main #filename-row {
   margin-right: 0;
 }
@@ -454,6 +454,9 @@ body {
 }
 
 .wrap-collapsible {
+    position: sticky;
+    left: 0;
+    
     margin-bottom: 16px;
 }
 
@@ -462,8 +465,9 @@ body {
 }
 
 :root {
-    --lightest-grey: rgba(200, 200, 200, .3);
+    --lightest-grey: rgba(230, 230, 230, .3);
     --border-smooth: 8px;
+    --transition-duration-smooth: .4s;
 }
 
 .lbl-toggle-collapsible {
@@ -482,24 +486,47 @@ body {
     
     cursor: pointer;
 
-    transition: all .25s ease-out;
+    transition: all var(--transition-duration-smooth) ease-out;
 }
 
-.lbl-toggle-collapsible::before {
+/* toggle-collapsible-bottom is the class for the button that
+ *   stays in the bottom part of the collapsible-content, to
+ *   facilitate collapsing it from below
+ */
+.toggle-collapsible-bottom {
+    display: block;
+
+    text-align: center;
+
+    cursor: pointer;
+    
+    background-color: inherit;
+}
+
+.lbl-toggle-collapsible::before,
+.toggle-collapsible-bottom::before {
     content: ' ';
     display: inline-block;
     
     vertical-align: middle;
     
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid currentColor;
-    
     margin-right: 0.7rem;
     
     transform: translateY(-2px);
-    
-    transition: transform .2s ease-out;
+}
+
+.lbl-toggle-collapsible::before {   
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentColor;
+
+    transition: transform calc(var(--transition-duration-smooth) - .1s) ease-out;
+}
+
+.toggle-collapsible-bottom::before {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid currentColor;
 }
 
 .toggle-collapsible:checked + .lbl-toggle-collapsible {
@@ -519,7 +546,7 @@ body {
     border-bottom-left-radius: var(--border-smooth);
     border-bottom-right-radius: var(--border-smooth);
     
-    transition: max-height .25s ease-in-out;
+    transition: max-height var(--transition-duration-smooth) ease-in-out;
 }
 
 .toggle-collapsible:checked + .lbl-toggle-collapsible + .collapsible-content {
@@ -527,9 +554,6 @@ body {
 }
 
 #matrixFilterArea {
-    position: sticky;
-    left: 0;
-    
     margin: 0;
 }
 

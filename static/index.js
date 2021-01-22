@@ -306,13 +306,14 @@ $(document).ready(function () {
   });
 
   $("#matrixFilterAreaOps input[name=ClearAll]").click(
-    _ =>
-      $("#matrixFilterBody input").get().forEach(el => el.checked = false)
+    _ => $("#matrixFilterBody input").get().forEach(el => el.checked = false)
   )                
   $("#matrixFilterAreaOps input[name=SelectAll]").click(
-    _ =>
-      $("#matrixFilterBody input").get().forEach(el => el.checked = true)
-  )               
+    _ => $("#matrixFilterBody input").get().forEach(el => el.checked = true)
+  )
+  $("#matrixCollapseBtnBottom").click(
+    _ => document.getElementById("matrixCollapseBtn").checked = false
+  )
 });
 
 function toggleMain(toAble, toDisable, toggleTrue, toggleFalse){
