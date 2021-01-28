@@ -420,7 +420,7 @@ n}
     margin-bottom: 0;
   }
 
-  .container .submit-code #collapse-button {
+   .container .submit-code #collapse-button {
     padding-bottom: 25px;
     padding-top: 0px;
     height: 34px;
@@ -444,13 +444,32 @@ n}
 /* Hapi Matrix */
 
 #matrix {
+    --matrix-side-spacing: 1rem;
+    
+    flex-flow: column;
+
+    min-width: 300px;
+
+    margin: 0;
+    padding: 0 var(--matrix-side-spacing) 20px var(--matrix-side-spacing);
+    
     overflow: auto;
-  flex-flow: column;
 }
 
-#matrix.container {
-  margin: 0;
-  padding-bottom: 20px;
+@media (min-width: 450px) and (max-width: 615.98px) {
+    #matrix {
+        font-size: small !important;
+    }
+}
+
+@media (max-width: 449.98px) {
+    #matrix {
+        font-size: x-small !important;
+    }
+  
+    #matrixFilterHeader {
+        font-size: 1.2em !important;
+    }
 }
 
 .wrap-collapsible {
@@ -465,7 +484,8 @@ n}
 }
 
 :root {
-    --lightest-grey: rgba(230, 230, 230, .3);
+    --lightest-grey: rgba(230, 230, 230, 0.3);
+    --light-grey: rgba(230, 230, 230, 0.6);
     --border-smooth: 8px;
     --transition-duration-smooth: .4s;
 }
@@ -489,6 +509,10 @@ n}
     transition: all var(--transition-duration-smooth) ease-out;
 }
 
+.lbl-toggle-collapsible:hover {
+    background-color: var(--light-grey);
+}
+
 /* toggle-collapsible-bottom is the class for the button that
  *   stays in the bottom part of the collapsible-content, to
  *   facilitate collapsing it from below
@@ -501,7 +525,13 @@ n}
     cursor: pointer;
     
     background-color: inherit;
+
+    transition: all 0.3 ease-in;
 }
+
+.toggle-collapsible-bottom:hover {
+    background-color: var(--light-grey);
+}    
 
 .lbl-toggle-collapsible::before,
 .toggle-collapsible-bottom::before {
@@ -560,8 +590,7 @@ n}
 #matrixFilterHeader {
   height: 48px;
   align-items: center;
-  justify-content: space-evenly;
-  font-size: x-large;
+  font-size: 1.5em;
   font-weight: bold;
 }
 
@@ -575,9 +604,9 @@ n}
 }
 
 #matrixFilterBody input[type="checkbox"] {
-  width: 15px;
-  height: 15px;
-  margin: 8px;
+  width: 1em;
+  height: 1em;
+  margin: 0.5em;
 }
 
 #matrixFilterBody>div>div.row {
@@ -596,7 +625,7 @@ n}
   border-bottom-right-radius: 5px;
   width: auto;
   border: none;
-  margin: 0 10px;
+  margin: 0 0.6em;
   cursor: pointer;
   color: #fff;
   font-weight: 700;
@@ -618,9 +647,9 @@ n}
 }
 
 .legendColumn>div {
-  width: 30px;
-  height: 30px;
-  margin-right: 8px;
+  width: 2em;
+  height: 2em;
+  margin-right: 0.5em;
 }
 
 /* This table styling became very complicated, but it is
@@ -628,7 +657,7 @@ n}
  *   of the table, when the region is scrolled.
  */
 #matrixDisplayTable {
-    margin: 0;
+    margin: 0 0 0 calc(0px - var(--matrix-side-spacing));
 }
 
 #matrixDisplayTable table {
@@ -639,17 +668,31 @@ n}
 
 #matrixDisplayTable th {
     text-align: center;
-}
-
-#matrixDisplayTable thead th {
     position: sticky;
     background-color: white;
-    border-top: 1px solid;
-  top: 0;
+    
 }
 
 #matrixDisplayTable th:first-child {
-  border-left: 1px solid;
+    border-left: 1px solid;
+    
+    left: calc(0px - var(--matrix-side-spacing));
+}
+
+#matrixDisplayTable thead th {
+    border-top: 1px solid;
+    top: 0;
+
+    z-index: 2;
+}
+
+/* Upper left corner should float over everything else */
+#matrixDisplayTable thead th:first-child {
+    z-index: 3;
+}
+
+#matrixDisplayTable tbody th {
+    z-index: 1;
 }
 
 #matrixDisplayTable thead th,
@@ -665,3 +708,7 @@ n}
 }
 
 /* End - Hapi Matrix */
+
+#lattices {
+    padding: 8px;
+}
