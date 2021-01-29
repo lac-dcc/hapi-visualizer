@@ -421,96 +421,96 @@ n}
   }
 
    .container .submit-code #collapse-button {
-    padding-bottom: 25px;
-    padding-top: 0px;
-    height: 34px;
-    width: 47px;
-    margin-top: 8px;
-    font-family: 'Verdana';
-    font-size: 20px;
-    font-weight: 800;
-    float: right;
+     padding-bottom: 25px;
+     padding-top: 0px;
+     height: 34px;
+     width: 47px;
+     margin-top: 8px;
+     font-family: 'Verdana';
+     font-size: 20px;
+     font-weight: 800;
+     float: right;
   }
 
   .container .submit-code #collapse-button:not(.collapsed)::after{
-    content: "-";
+  content: "-";
   }
 
   .container .submit-code #collapse-button.collapsed::after{
-    content: "+";
+  content: "+";
   }
 }
 
 /* Hapi Matrix */
 
 #matrix {
-    --matrix-side-spacing: 1rem;
-    
-    flex-flow: column;
+  --matrix-side-spacing: 1rem;
+  
+  flex-flow: column;
 
-    min-width: 300px;
+  margin: 0;
+  padding: 0 var(--matrix-side-spacing) 20px var(--matrix-side-spacing);
 
-    margin: 0;
-    padding: 0 var(--matrix-side-spacing) 20px var(--matrix-side-spacing);
-    
-    overflow: auto;
+  min-width: 280px; /* Galaxy Fold */
+  
+  overflow: auto;
 }
 
 @media (min-width: 450px) and (max-width: 615.98px) {
-    #matrix {
-        font-size: small !important;
-    }
+  #matrix {
+      font-size: small !important;
+  }
 }
 
 @media (max-width: 449.98px) {
-    #matrix {
-        font-size: x-small !important;
-    }
+  #matrix {
+      font-size: x-small !important;
+  }
   
-    #matrixFilterHeader {
-        font-size: 1.2em !important;
-    }
+  #matrixFilterHeader {
+      font-size: 1.2em !important;
+  }
 }
 
 .wrap-collapsible {
-    position: sticky;
-    left: 0;
-    
-    margin-bottom: 16px;
+  position: sticky;
+  left: 0;
+  
+  margin-bottom: 16px;
 }
 
 .toggle-collapsible {
-    display: none;
+  display: none;
 }
 
 :root {
-    --lightest-grey: rgba(230, 230, 230, 0.3);
-    --light-grey: rgba(230, 230, 230, 0.6);
-    --border-smooth: 8px;
-    --transition-duration-smooth: .4s;
+  --lightest-grey: rgba(230, 230, 230, 0.3);
+  --light-grey: rgba(230, 230, 230, 0.6);
+  --border-smooth: 8px;
+  --transition-duration-smooth: .4s;
 }
 
 .lbl-toggle-collapsible {
-    display: block;
+  display: block;
 
-    text-align: left;
-    
-    background-color: var(--lightest-grey);
-    
-    border-bottom-left-radius: var(--border-smooth);
-    border-bottom-right-radius: var(--border-smooth);
+  text-align: left;
+  
+  background-color: var(--lightest-grey);
+  
+  border-bottom-left-radius: var(--border-smooth);
+  border-bottom-right-radius: var(--border-smooth);
 
-    margin: 0 0 8px 0;
+  margin: 0 0 8px 0;
 
-    padding-left: 0.7rem;
-    
-    cursor: pointer;
+  padding-left: 0.7rem;
+  
+  cursor: pointer;
 
-    transition: all var(--transition-duration-smooth) ease-out;
+  transition: all var(--transition-duration-smooth) ease-out;
 }
 
 .lbl-toggle-collapsible:hover {
-    background-color: var(--light-grey);
+  background-color: var(--light-grey);
 }
 
 /* toggle-collapsible-bottom is the class for the button that
@@ -518,73 +518,73 @@ n}
  *   facilitate collapsing it from below
  */
 .toggle-collapsible-bottom {
-    display: block;
+  display: block;
 
-    text-align: center;
+  text-align: center;
 
-    cursor: pointer;
-    
-    background-color: inherit;
+  cursor: pointer;
+  
+  background-color: inherit;
 
-    transition: all 0.3 ease-in;
+  transition: all 0.3 ease-in;
 }
 
 .toggle-collapsible-bottom:hover {
-    background-color: var(--light-grey);
+  background-color: var(--light-grey);
 }    
 
 .lbl-toggle-collapsible::before,
 .toggle-collapsible-bottom::before {
-    content: ' ';
-    display: inline-block;
-    
-    vertical-align: middle;
-    
-    margin-right: 0.7rem;
-    
-    transform: translateY(-2px);
+  content: ' ';
+  display: inline-block;
+  
+  vertical-align: middle;
+  
+  margin-right: 0.7rem;
+  
+  transform: translateY(-2px);
 }
 
 .lbl-toggle-collapsible::before {   
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid currentColor;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid currentColor;
 
-    transition: transform calc(var(--transition-duration-smooth) - .1s) ease-out;
+  transition: transform calc(var(--transition-duration-smooth) - .1s) ease-out;
 }
 
 .toggle-collapsible-bottom::before {
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid currentColor;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid currentColor;
 }
 
 .toggle-collapsible:checked + .lbl-toggle-collapsible {
-    border-radius: 0;
-    margin: 0;
+  border-radius: 0;
+  margin: 0;
 }
 
 .toggle-collapsible:checked + .lbl-toggle-collapsible::before {
-    transform: rotate(90deg) translateX(-3px);
+  transform: rotate(90deg) translateX(-3px);
 }
 
 .collapsible-content {
-    max-height: 0;
-    overflow: hidden;
-    background-color: var(--lightest-grey);
+  max-height: 0;
+  overflow: hidden;
+  background-color: var(--lightest-grey);
 
-    border-bottom-left-radius: var(--border-smooth);
-    border-bottom-right-radius: var(--border-smooth);
-    
-    transition: max-height var(--transition-duration-smooth) ease-in-out;
+  border-bottom-left-radius: var(--border-smooth);
+  border-bottom-right-radius: var(--border-smooth);
+  
+  transition: max-height var(--transition-duration-smooth) ease-in-out;
 }
 
 .toggle-collapsible:checked + .lbl-toggle-collapsible + .collapsible-content {
-    max-height: 100vh;
+  max-height: 100vh;
 }
 
 #matrixFilterArea {
-    margin: 0;
+  margin: 0;
 }
 
 #matrixFilterHeader {
@@ -607,15 +607,25 @@ n}
   width: 1em;
   height: 1em;
   margin: 0.5em;
+
+  flex-shrink: 0;
+}
+
+/* Handles text overflow after checkboxes */
+#matrixFilterBody input[type="checkbox"] + span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #matrixFilterBody>div>div.row {
-  word-break: break-word;
+  flex-wrap: nowrap;
   align-items: center;
 }
 
 #matrixFilterAreaOps {
   flex-flow: row-reverse;
+  flex-wrap: wrap;
   margin-bottom: 30px;
 }
 
@@ -633,14 +643,14 @@ n}
 }
 
 #matrixDisplayLegend {
-    position: sticky;
-    left: 0;
-    margin: 0;
+  position: sticky;
+  left: 0;
+  margin: 0;
   margin-bottom: 8px;
 }
 
 .legendColumn {
-    display: flex;
+  display: flex;
   flex-flow: nowrap;
   align-items: center;
   padding: 0 8px;
@@ -657,7 +667,7 @@ n}
  *   of the table, when the region is scrolled.
  */
 #matrixDisplayTable {
-    margin: 0 0 0 calc(0px - var(--matrix-side-spacing));
+  margin: 0 0 0 calc(0px - var(--matrix-side-spacing));
 }
 
 #matrixDisplayTable table {
@@ -667,32 +677,32 @@ n}
 }
 
 #matrixDisplayTable th {
-    text-align: center;
-    position: sticky;
-    background-color: white;
-    
+  text-align: center;
+  position: sticky;
+  background-color: white;
+  
 }
 
 #matrixDisplayTable th:first-child {
-    border-left: 1px solid;
-    
-    left: calc(0px - var(--matrix-side-spacing));
+  border-left: 1px solid;
+  
+  left: calc(0px - var(--matrix-side-spacing));
 }
 
 #matrixDisplayTable thead th {
-    border-top: 1px solid;
-    top: 0;
+  border-top: 1px solid;
+  top: 0;
 
-    z-index: 2;
+  z-index: 2;
 }
 
 /* Upper left corner should float over everything else */
 #matrixDisplayTable thead th:first-child {
-    z-index: 3;
+  z-index: 3;
 }
 
 #matrixDisplayTable tbody th {
-    z-index: 1;
+  z-index: 1;
 }
 
 #matrixDisplayTable thead th,
@@ -710,5 +720,5 @@ n}
 /* End - Hapi Matrix */
 
 #lattices {
-    padding: 8px;
+  padding: 8px;
 }
