@@ -115,8 +115,8 @@
             </div>
 
             <div class="row form-row-last justify-content-end submit-buttons">
-              <input type="button" name="register" id="preview" class="disabled" value="Preview" data-toggle="modal" data-target="#exampleModalLong" disabled>
-              <input type="button" name="register" id="generate" value="Generate">
+              <input type="button" id="preview" class="disabled" value="Preview" data-toggle="modal" data-target="#resultsModal" disabled>
+              <input type="button" id="generate" value="Generate">
             </div>
           </div>
         </div>
@@ -130,19 +130,19 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg w-100" role="document">
       <div class="modal-content h-100">
         <div class="modal-header">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#yaml" role="tab" aria-controls="home" aria-selected="true">YAML</a>
+              <a class="nav-link active" data-toggle="tab" href="#yaml" role="tab" aria-selected="true">YAML</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#matrix" role="tab" aria-controls="profile" aria-selected="false">Matrix</a>
+              <a class="nav-link" data-toggle="tab" href="#matrix" role="tab" aria-selected="false">Matrix</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#lattices" role="tab" aria-controls="contact" aria-selected="false">Lattices</a>
+              <a class="nav-link" data-toggle="tab" href="#posets" role="tab" aria-selected="false">Posets</a>
             </li>
           </ul>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -150,11 +150,11 @@
           </button>
         </div>
         <div class="modal-body h-100" style="overflow: auto">
-          <div class="tab-content h-100" id="myTabContent">
-            <div class="tab-pane fade show active" id="yaml" role="tabpanel" aria-labelledby="home-tab">
+          <div class="tab-content h-100">
+            <div class="tab-pane fade show active" id="yaml" role="tabpanel">
               <textarea id="yaml-code" class="form-control" rows="12" disabled> </textarea>
             </div>      
-            <div class="tab-pane container fade" id="matrix" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="tab-pane container fade" id="matrix" role="tabpanel">
               <div class="wrap-collapsible">
                 <input id="matrixCollapseBtn" class="toggle-collapsible" type="checkbox" name="collapse-btn">
                 <label for="matrixCollapseBtn" class="lbl-toggle-collapsible">Filter matrix</label>
@@ -208,19 +208,19 @@
               <div id="matrixDisplayTable" class="row">
               </div>
             </div>
-            <div class="tab-pane fade" id="lattices" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="tab-pane fade" id="posets" role="tabpanel">
               <div class="row justify-content-center">
-                <div class="">
+                <div class="dotGraphWrapper">
                   <label for="actors">Actors</label>
                   <div id="actorsGraph"></div>
                 </div>
-                <div class="">
-                  <label for="resources">Resources</label>
-                  <div id="resourcesGraph"></div>
-                </div>
-                <div class="">
+                <div class="dotGraphWrapper">
                   <label for="actions">Actions</label>
                   <div id="actionsGraph"></div>
+                </div>
+                <div class="dotGraphWrapper">
+                  <label for="resources">Resources</label>
+                  <div id="resourcesGraph"></div>
                 </div>
               </div>
             </div>

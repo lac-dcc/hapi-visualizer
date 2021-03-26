@@ -105,7 +105,7 @@ function receivingSuccess(res){
   genDot('actionsGraph', res.actions);
   $('input#preview').removeClass('disabled');
   $('input#preview').removeAttr('disabled');
-  $('#exampleModalLong').modal('show');
+  $('#resultsModal').modal('show');
 
 }
 
@@ -199,7 +199,7 @@ function updateMatrixDisplay(actors, resources, actions) {
   // Fill the table
   var newRow = document.createElement("tr"); // Top row
   var newTh = document.createElement("th"); // Upper left corner
-    var newThead = document.createElement("thead");
+  var newThead = document.createElement("thead");
     
     // Generating column headers
   newRow.appendChild(newTh);
@@ -208,10 +208,10 @@ function updateMatrixDisplay(actors, resources, actions) {
     newTh.innerHTML = resources[i];
     newRow.appendChild(newTh);
   }
-    newThead.appendChild(newRow);
+  newThead.appendChild(newRow);
   matrixTable.appendChild(newThead);
 
-    var newTbody = document.createElement("tbody");
+  var newTbody = document.createElement("tbody");
   var newTd = undefined;
   var newDiv = undefined;
   // Now the rest of the rows, one by one
@@ -242,7 +242,7 @@ function updateMatrixDisplay(actors, resources, actions) {
     }
     newTbody.appendChild(newRow);
   }
-    matrixTable.appendChild(newTbody);
+  matrixTable.appendChild(newTbody);
 
   // Finally, insert table in appropriate area
   document.getElementById("matrixDisplayTable").appendChild(matrixTable);
@@ -250,6 +250,23 @@ function updateMatrixDisplay(actors, resources, actions) {
 
 $(document).ready(function () {
   $('#toggle-main-code')[0].checked = true;
+
+  // Add tab key functionality to the code text area
+  $("#code").on("keydown", function (ev) {
+    if (ev.key === "Tab") {
+      ev.preventDefault();
+
+      var start = this.selectionStart;
+      var end = this.selectionEnd;
+
+      this.value = this.value.substring(0, start) + "\t" +
+        this.value.substring(end);
+
+      // Make sure to return the caret to the right place
+      this.selectionStart =
+        this.selectionEnd = start + 1;
+    }
+  })
 
   $("#generate").click(function (e) {
 
@@ -300,20 +317,23 @@ $(document).ready(function () {
   });
 
   // Matrix filter events
-  $("#matrixFilterAreaOps input[name=Filter]").click(function (e) {
-    filterMatrix();
-    e.preventDefault();
-  });
 
+  // The collapse animation is done purely in css by a checkbox
+  // trick
+  $("#matrixCollapseBtnBottom").click(
+    _ => document.getElementById("matrixCollapseBtn").checked = false
+  )
   $("#matrixFilterAreaOps input[name=ClearAll]").click(
     _ => $("#matrixFilterBody input").get().forEach(el => el.checked = false)
   )                
   $("#matrixFilterAreaOps input[name=SelectAll]").click(
     _ => $("#matrixFilterBody input").get().forEach(el => el.checked = true)
   )
-  $("#matrixCollapseBtnBottom").click(
-    _ => document.getElementById("matrixCollapseBtn").checked = false
-  )
+  $("#matrixFilterAreaOps input[name=Filter]").click(function (e) {
+    e.preventDefault();
+    filterMatrix();
+  });
+
 });
 
 function toggleMain(toAble, toDisable, toggleTrue, toggleFalse){

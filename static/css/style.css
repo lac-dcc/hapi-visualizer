@@ -451,24 +451,22 @@ n}
   margin: 0;
   padding: 0 var(--matrix-side-spacing) 20px var(--matrix-side-spacing);
 
-  min-width: 280px; /* Galaxy Fold */
-  
   overflow: auto;
 }
 
 @media (min-width: 450px) and (max-width: 615.98px) {
   #matrix {
-      font-size: small !important;
+    font-size: small !important;
   }
 }
 
 @media (max-width: 449.98px) {
   #matrix {
-      font-size: x-small !important;
+    font-size: x-small !important;
   }
   
   #matrixFilterHeader {
-      font-size: 1.2em !important;
+    font-size: 1.2em !important;
   }
 }
 
@@ -526,7 +524,7 @@ n}
   
   background-color: inherit;
 
-  transition: all 0.3 ease-in;
+  transition: all 0.3s ease-in;
 }
 
 .toggle-collapsible-bottom:hover {
@@ -717,8 +715,16 @@ n}
   padding: 0;
 }
 
+#matrixDisplayTable td>div {
+  padding: 0 2px;
+}
+
 /* End - Hapi Matrix */
 
-#lattices {
+#posets {
   padding: 8px;
+}
+
+.dotGraphWrapper {
+  margin: 0.2em;
 }
