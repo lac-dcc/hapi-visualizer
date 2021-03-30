@@ -58,7 +58,7 @@ function generate(){
     formData.append('import'+(i+1), filesForUp[i]);
   }
   request.onreadystatechange = receivingData;
-  request.open("POST", '/generate', true);
+  request.open("POST", 'generate', true);
   request.send(formData);
 }
 
@@ -120,10 +120,9 @@ var matrixActions = undefined;
 
 // This function adds the first display of the Matrix, which shall be
 //   unfiltered. That means that all the actors, resources and actions should be
-//   displayed.
-// Also, it initializes the variable jsonMatrix
+//   displayed at first.
+// Also, it initializes the global variables related to the matrix
 function addMatrixDisplay(jsonStringMatrix) {
-  // Create HTML Object from JSON object
   jsonMatrix = JSON.parse(jsonStringMatrix);
   matrixActors = Object.keys(jsonMatrix);
   matrixResources = Object.keys(jsonMatrix[matrixActors[0]]);
@@ -132,12 +131,9 @@ function addMatrixDisplay(jsonStringMatrix) {
   updateMatrixDisplay(matrixActors, matrixResources, matrixActions);
 }
 
-// Adds checkboxes into the Hapi matrix area (preferably into a modal created
-//   specifically for this purpose).
-// The idea is to create three bootstrap columns, one for each lattice - actors,
-//   resources, actions.
-// Each actor, resource and action shall have its own checkbox, to determine
-//   whether or not to display it in the matrix.
+// Adds checkboxes into the Hapi matrix area.
+// Each actor, resource and action has its own checkbox, to
+//   determine whether or not to display it in the matrix.
 // The default status of the checkboxes shall be "checked".
 function updateMatrixCheckboxes() {
   // Clear current checkboxes
@@ -170,7 +166,8 @@ function updateMatrixCheckboxes() {
 // Whenever it is decided to implement filtering based on user input text, this
 //   function should also handle this factor (that is, take into account the
 //   text input).
-// Delegates task of actually changing html elements to function updateMatrix
+// Delegates task of actually changing html elements to function
+//   updateMatrixDisplay.
 function filterMatrix() {
     var filteredActors = undefined;
     var filteredResources = undefined;
