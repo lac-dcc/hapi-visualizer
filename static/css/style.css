@@ -442,12 +442,12 @@ n}
 }
 
 #resultsModal {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 #resultsModalContent {
-    /* <full vh> - <parent top margin> - <small offset> */
-    height: calc(100vh - 1.75rem - 0.5rem)!important;
+  /* <full vh> - <parent top margin> - <small offset> */
+  height: calc(100vh - 1.75rem - 0.5rem)!important;
 }
 
 /* Hapi Matrix */
@@ -538,7 +538,7 @@ n}
 
 .toggle-collapsible-bottom:hover {
   background-color: var(--light-grey);
-}    
+}
 
 .lbl-toggle-collapsible::before,
 .toggle-collapsible-bottom::before {

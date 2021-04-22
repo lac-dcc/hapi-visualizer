@@ -158,9 +158,9 @@ function updateMatrixCheckboxes() {
         newRow.appendChild(newSpan);
         document.getElementById("matrixFilterBody").children[index].appendChild(newRow)
       })
-  });    
+  });
 }
-    
+
 // Gets information on checked checkboxes to determine which rows / columns and
 //   actions should be displayed.
 // Whenever it is decided to implement filtering based on user input text, this
@@ -169,21 +169,21 @@ function updateMatrixCheckboxes() {
 // Delegates task of actually changing html elements to function
 //   updateMatrixDisplay.
 function filterMatrix() {
-    var filteredActors = undefined;
-    var filteredResources = undefined;
-    var filteredActions = undefined;
+  var filteredActors = undefined;
+  var filteredResources = undefined;
+  var filteredActions = undefined;
 
-    function filterLattice(index) {
-      return $(`#matrixFilterBody>div:nth-child(${index}) input`).filter(
-        function() { return this.checked }).siblings().get()
-        .map(el => el.innerHTML);
-    }
-    
-    filteredActors = filterLattice(1);
-    filteredResources = filterLattice(2);
-    filteredActions = filterLattice(3);
+  function filterLattice(index) {
+    return $(`#matrixFilterBody>div:nth-child(${index}) input`)
+      .filter(function() { return this.checked }).siblings().get()
+      .map(el => el.innerHTML);
+  }
+  
+  filteredActors = filterLattice(1);
+  filteredResources = filterLattice(2);
+  filteredActions = filterLattice(3);
 
-    updateMatrixDisplay(filteredActors, filteredResources, filteredActions);
+  updateMatrixDisplay(filteredActors, filteredResources, filteredActions);
 }
 
 function updateMatrixDisplay(actors, resources, actions) {
@@ -197,8 +197,8 @@ function updateMatrixDisplay(actors, resources, actions) {
   var newRow = document.createElement("tr"); // Top row
   var newTh = document.createElement("th"); // Upper left corner
   var newThead = document.createElement("thead");
-    
-    // Generating column headers
+
+  // Generating column headers
   newRow.appendChild(newTh);
   for (i in resources) {
     newTh = document.createElement("th");
