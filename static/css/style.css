@@ -441,6 +441,15 @@ n}
   }
 }
 
+#resultsModal {
+    overflow: hidden;
+}
+
+#resultsModalContent {
+    /* <full vh> - <parent top margin> - <small offset> */
+    height: calc(100vh - 1.75rem - 0.5rem)!important;
+}
+
 /* Hapi Matrix */
 
 #matrix {
@@ -451,7 +460,7 @@ n}
   margin: 0;
   padding: 0 var(--matrix-side-spacing) 20px var(--matrix-side-spacing);
 
-  overflow: auto;
+  overflow: overlay;
 }
 
 @media (min-width: 450px) and (max-width: 615.98px) {
@@ -498,7 +507,7 @@ n}
   border-bottom-left-radius: var(--border-smooth);
   border-bottom-right-radius: var(--border-smooth);
 
-  margin: 0 0 8px 0;
+  margin: 0 -16px 8px -16px;
 
   padding-left: 0.7rem;
   
@@ -678,7 +687,6 @@ n}
   text-align: center;
   position: sticky;
   background-color: white;
-  
 }
 
 #matrixDisplayTable th:first-child {
