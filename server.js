@@ -92,7 +92,6 @@ app.post('/generate', function(req, res, next){
         const resultActors = fs.readFileSync(resultActorsFile, "utf8");
         const resultResources = fs.readFileSync(resultResourcesFile, "utf8");
         const resultActions = fs.readFileSync(resultActionsFile, "utf8");
-        const resultHtmlMatrix = fs.readFileSync(`${outputDir+mainFile}.html`, "utf8");
         const resultJsonMatrix = fs.readFileSync(`${outputDir+mainFile}.json`, "utf8");
 
         res.json({
@@ -100,7 +99,6 @@ app.post('/generate', function(req, res, next){
           actors: resultActors,
           resources: resultResources,
           actions: resultActions,
-          htmlMatrix: resultHtmlMatrix,
           jsonMatrix: resultJsonMatrix,
           datamap: stdout
         });
