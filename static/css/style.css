@@ -100,6 +100,7 @@ body {
   white-space: nowrap;
   padding-right: 0;
 }
+
 .container .write-code #drop-main #filename-row {
   margin-right: 0;
 }
@@ -193,7 +194,7 @@ body {
   height: 34px;
 }
 
-.container .write-code .switch input { 
+.container .write-code .switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -250,7 +251,7 @@ body {
 }
 
 .container .submit-code h2 {
-	color: #3786bd;
+  color: #3786bd;
 }
 
 .container .submit-code .upload-drop-zone {
@@ -264,11 +265,11 @@ body {
 }
 
 .container .submit-code span {
-	font-weight: 600;
-	font-size: 15px;
-	color: #666;
-	display: block;
-	margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #666;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .container .submit-code .upload-drop-zone .list-group {
@@ -291,7 +292,7 @@ body {
 
 .upload-drop-zone .label-blue{
   color: #53c83c !important;
-} 
+}
 
 .upload-drop-zone #label-or,
 .upload-drop-zone #label-drop {
@@ -408,7 +409,7 @@ body {
     border-top-left-radius: 10px;
     padding: 20px;
   }
-  
+
   .container .submit-code {
     border-top-right-radius: 0;
     border-bottom-left-radius: 10px;
@@ -439,4 +440,300 @@ body {
   .container .submit-code #collapse-button.collapsed::after{
     content: "+";
   }
+}
+
+#resultsModal {
+  overflow: hidden;
+}
+
+#resultsModalContent {
+  /* <full vh> - <parent top margin> - <small offset> */
+  height: calc(100vh - 1.75rem - 0.5rem)!important;
+}
+
+/* Hapi Matrix */
+
+#matrix {
+  --matrix-side-spacing: 1rem;
+  
+  flex-flow: column;
+
+  margin: 0;
+  padding: 0 var(--matrix-side-spacing) 20px var(--matrix-side-spacing);
+
+  overflow: overlay;
+}
+
+@media (min-width: 450px) and (max-width: 615.98px) {
+  #matrix {
+    font-size: small !important;
+  }
+}
+
+@media (max-width: 449.98px) {
+  #matrix {
+    font-size: x-small !important;
+  }
+  
+  #matrixFilterHeader {
+    font-size: 1.2em !important;
+  }
+}
+
+.wrap-collapsible {
+  position: sticky;
+  left: 0;
+  
+  margin-bottom: 16px;
+}
+
+.toggle-collapsible {
+  display: none;
+}
+
+:root {
+  --lightest-grey: rgba(230, 230, 230, 0.3);
+  --light-grey: rgba(230, 230, 230, 0.6);
+  --border-smooth: 8px;
+  --transition-duration-smooth: .4s;
+}
+
+.lbl-toggle-collapsible {
+  display: block;
+
+  text-align: left;
+  
+  background-color: var(--lightest-grey);
+  
+  border-bottom-left-radius: var(--border-smooth);
+  border-bottom-right-radius: var(--border-smooth);
+
+  margin: 0 -16px 8px -16px;
+
+  padding-left: 0.7rem;
+  
+  cursor: pointer;
+
+  transition: all var(--transition-duration-smooth) ease-out;
+}
+
+.lbl-toggle-collapsible:hover {
+  background-color: var(--light-grey);
+}
+
+/* toggle-collapsible-bottom is the class for the button that
+ *   stays in the bottom part of the collapsible-content, to
+ *   facilitate collapsing it from below
+ */
+.toggle-collapsible-bottom {
+  display: block;
+
+  text-align: center;
+
+  cursor: pointer;
+  
+  background-color: inherit;
+
+  transition: all 0.3s ease-in;
+}
+
+.toggle-collapsible-bottom:hover {
+  background-color: var(--light-grey);
+}
+
+.lbl-toggle-collapsible::before,
+.toggle-collapsible-bottom::before {
+  content: ' ';
+  display: inline-block;
+  
+  vertical-align: middle;
+  
+  margin-right: 0.7rem;
+  
+  transform: translateY(-2px);
+}
+
+.lbl-toggle-collapsible::before {   
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid currentColor;
+
+  transition: transform calc(var(--transition-duration-smooth) - .1s) ease-out;
+}
+
+.toggle-collapsible-bottom::before {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid currentColor;
+}
+
+.toggle-collapsible:checked + .lbl-toggle-collapsible {
+  border-radius: 0;
+  margin: 0;
+}
+
+.toggle-collapsible:checked + .lbl-toggle-collapsible::before {
+  transform: rotate(90deg) translateX(-3px);
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  background-color: var(--lightest-grey);
+
+  border-bottom-left-radius: var(--border-smooth);
+  border-bottom-right-radius: var(--border-smooth);
+  
+  transition: max-height var(--transition-duration-smooth) ease-in-out;
+}
+
+.toggle-collapsible:checked + .lbl-toggle-collapsible + .collapsible-content {
+  max-height: 100vh;
+}
+
+#matrixFilterArea {
+  margin: 0;
+}
+
+#matrixFilterHeader {
+  height: 48px;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#matrixFilterHeader>div {
+  text-align: center;
+}
+
+#matrixFilterBody {
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+
+#matrixFilterBody input[type="checkbox"] {
+  width: 1em;
+  height: 1em;
+  margin: 0.5em;
+
+  flex-shrink: 0;
+}
+
+/* Handles text overflow after checkboxes */
+#matrixFilterBody input[type="checkbox"] + span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#matrixFilterBody>div>div.row {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+#matrixFilterAreaOps {
+  flex-flow: row-reverse;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+#matrixFilterAreaOps input{
+  background: #3786bd;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: auto;
+  border: none;
+  margin: 0 0.6em;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  padding: 4px 8px;
+}
+
+#matrixDisplayLegend {
+  position: sticky;
+  left: 0;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.legendColumn {
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.legendColumn>div {
+  width: 2em;
+  height: 2em;
+  margin-right: 0.5em;
+}
+
+/* This table styling became very complicated, but it is
+ *   so that the header may properly float over the rest
+ *   of the table, when the region is scrolled.
+ */
+#matrixDisplayTable {
+  margin: 0 0 0 calc(0px - var(--matrix-side-spacing));
+}
+
+#matrixDisplayTable table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+#matrixDisplayTable th {
+  text-align: center;
+  position: sticky;
+  background-color: white;
+}
+
+#matrixDisplayTable th:first-child {
+  border-left: 1px solid;
+  
+  left: calc(0px - var(--matrix-side-spacing));
+}
+
+#matrixDisplayTable thead th {
+  border-top: 1px solid;
+  top: 0;
+
+  z-index: 2;
+}
+
+/* Upper left corner should float over everything else */
+#matrixDisplayTable thead th:first-child {
+  z-index: 3;
+}
+
+#matrixDisplayTable tbody th {
+  z-index: 1;
+}
+
+#matrixDisplayTable thead th,
+#matrixDisplayTable tbody th,
+#matrixDisplayTable tbody td {
+  border-color: black;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+#matrixDisplayTable td {
+  padding: 0;
+}
+
+#matrixDisplayTable td>div {
+  padding: 0 2px;
+}
+
+/* End - Hapi Matrix */
+
+#posets {
+  padding: 8px;
+}
+
+.dotGraphWrapper {
+  margin: 0.2em;
 }

@@ -3,3 +3,5 @@ package-lock.json
 hapi/
 output/
 bin/
+.gradle/
+
