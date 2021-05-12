@@ -99,7 +99,8 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 0;
-n}
+}
+
 .container .write-code #drop-main #filename-row {
   margin-right: 0;
 }
@@ -420,24 +421,24 @@ n}
     margin-bottom: 0;
   }
 
-   .container .submit-code #collapse-button {
-     padding-bottom: 25px;
-     padding-top: 0px;
-     height: 34px;
-     width: 47px;
-     margin-top: 8px;
-     font-family: 'Verdana';
-     font-size: 20px;
-     font-weight: 800;
-     float: right;
+  .container .submit-code #collapse-button {
+    padding-bottom: 25px;
+    padding-top: 0px;
+    height: 34px;
+    width: 47px;
+    margin-top: 8px;
+    font-family: 'Verdana';
+    font-size: 20px;
+    font-weight: 800;
+    float: right;
   }
 
   .container .submit-code #collapse-button:not(.collapsed)::after{
-  content: "-";
+    content: "-";
   }
 
   .container .submit-code #collapse-button.collapsed::after{
-  content: "+";
+    content: "+";
   }
 }
 
